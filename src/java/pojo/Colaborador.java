@@ -10,5 +10,143 @@ package pojo;
  * @author afs30
  */
 public class Colaborador {
+       private Integer IdColaborador;
+       private String Nombre;
+       private String ApellidoPaterno;
+       private String ApellidoMaterno;
+       private String CURP;
+       private String Correo;
+       private String Password;
+       private Integer IdRol;
+       private String Rol;
+       private String fotoBase64;
+       private String NoLicencia;
+       private String NoPersonal;
+       private Integer IdConductor;
+
+    public Colaborador() {
+    }
+
+    public Colaborador(Integer IdColaborador, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String CURP, String Correo, String Password, Integer IdRol, String Rol, String fotoBase64, String NoLicencia, String NoPersonal, Integer idConductor) {
+        this.IdColaborador = IdColaborador;
+        this.Nombre = Nombre;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.CURP = CURP;
+        this.Correo = Correo;
+        this.Password = Password;
+        this.IdRol = IdRol;
+        this.Rol = Rol;
+        this.fotoBase64 = fotoBase64;
+        this.NoLicencia = NoLicencia;
+        this.NoPersonal = NoPersonal;
+        this.IdConductor = IdConductor;
+    }
+
+    public Integer getIdColaborador() {
+        return IdColaborador;
+    }
+
+    public void setIdColaborador(Integer IdColaborador) {
+        this.IdColaborador = IdColaborador;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return ApellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String ApellidoPaterno) {
+        this.ApellidoPaterno = ApellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return ApellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String ApellidoMaterno) {
+        this.ApellidoMaterno = ApellidoMaterno;
+    }
+
+    public String getCURP() {
+        return CURP;
+    }
+
+    public void setCURP(String CURP) {
+        this.CURP = CURP;
+    }
+
+    public String getCorreo() {
+        return Correo;
+    }
+
+    public void setCorreo(String Correo) {
+        this.Correo = Correo;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public Integer getIdRol() {
+        return IdRol;
+    }
+
+    public void setIdRol(Integer IdRol) {
+        this.IdRol = IdRol;
+    }
+
+    public String getRol() {
+        return Rol;
+    }
+
+    public void setRol(String Rol) {
+        this.Rol = Rol;
+    }
+
+    public String getFotoBase64() {
+        return fotoBase64;
+    }
+
+    public void setFotoBase64(String fotoBase64) {
+        this.fotoBase64 = fotoBase64;
+    }
+
+    public String getNoLicencia() {
+        return NoLicencia;
+    }
+
+    public void setNoLicencia(String NoLicencia) {
+        this.NoLicencia = NoLicencia;
+    }
+
+    public String getNoPersonal() {
+        return NoPersonal;
+    }
+
+    public void setNoPersonal(String NoPersonal) {
+        this.NoPersonal = NoPersonal;
+    }
+
+    public Integer getIdConductor() {
+        return IdConductor;
+    }
+
+    public void setIdConductor(Integer IdConductor) {
+        this.IdConductor = IdConductor;
+    }
+
+  
     
 }
