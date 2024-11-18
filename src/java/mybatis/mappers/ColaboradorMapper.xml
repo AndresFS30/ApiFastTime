@@ -49,7 +49,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE IdColaborador = #{IdColaborador};
     </update>
 
-
+     <insert id="actualizarConductor" parameterType="pojo.Colaborador" >
+     INSERT INTO Conductor (IdColaborador,NumeroLicencia)
+     VALUES (#{IdColaborador}, #{NumeroLicencia});
+    </insert>
+    
+    
     <delete id="eliminarColaboradorId" parameterType="pojo.Colaborador">
         DELETE
         FROM Colaborador

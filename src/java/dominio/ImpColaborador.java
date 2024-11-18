@@ -176,4 +176,32 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     }
     return respuesta ;
     }
+    
+    
+    public static Mensaje actualizarConductor(Colaborador colaborador){
+     Mensaje msj = new Mensaje();
+     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+     if(conexionBD!= null){
+         try{
+         int resultado =conexionBD.insert("colaborador.actualizarConductor", colaborador);
+         conexionBD.commit();
+         if(resultado > 0){
+             msj.setError(false);
+             msj.setMensaje("Licencia actualizada con exito");
+         }else{
+             msj.setError(true);
+             msj.setMensaje("no se pudo actualizar Licencia, intentarlo mas tarde.");
+         }
+         }catch(Exception e){
+         msj.setError(true);
+         msj.setMensaje(e.getMessage());
+         }finally{
+        conexionBD.close();
+        }
+     }else{
+         msj.setError(true);
+         msj.setMensaje("No se pudo establecer conexión a la base de datos");
+     }
+    return msj;
+    }
 }

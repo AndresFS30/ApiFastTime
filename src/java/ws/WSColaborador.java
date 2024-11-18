@@ -122,4 +122,22 @@ public class WSColaborador {
         return ImpColaborador.eliminarColaborador(IdColaborador);
     }
     
+    @Path("actualizarConductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje actualizarConductor(String jsonColaborador){
+        
+       try{
+       Gson gson = new Gson();
+        Colaborador colaborador = gson.fromJson(jsonColaborador, Colaborador.class);
+        return ImpColaborador.actualizarConductor(colaborador);
+       
+       }catch(Exception e){
+        e.printStackTrace();
+        throw new BadRequestException();
+       }
+        
+    }
+    
 }

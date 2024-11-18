@@ -23,11 +23,12 @@ public class Colaborador {
        private String NoLicencia;
        private String NoPersonal;
        private Integer IdConductor;
+       private String NumeroLicencia;
 
     public Colaborador() {
     }
 
-    public Colaborador(Integer IdColaborador, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String CURP, String Correo, String Password, Integer IdRol, String Rol, String fotoBase64, String NoLicencia, String NoPersonal, Integer idConductor) {
+    public Colaborador(Integer IdColaborador, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String CURP, String Correo, String Password, Integer IdRol, String Rol, String fotoBase64, String NoLicencia, String NoPersonal, Integer IdConductor, String NumeroLicencia) {
         this.IdColaborador = IdColaborador;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -41,6 +42,7 @@ public class Colaborador {
         this.NoLicencia = NoLicencia;
         this.NoPersonal = NoPersonal;
         this.IdConductor = IdConductor;
+        this.NumeroLicencia = NumeroLicencia;
     }
 
     public Integer getIdColaborador() {
@@ -147,6 +149,13 @@ public class Colaborador {
         this.IdConductor = IdConductor;
     }
 
-  
-    
+    public String getNumeroLicencia() {
+        return NumeroLicencia;
+    }
+
+    public void setNumeroLicencia(String NumeroLicencia) {
+        this.NumeroLicencia = NumeroLicencia;
+    }
+
+   
 }
