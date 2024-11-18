@@ -53,11 +53,7 @@ public class WSColaborador {
     @Path("obtenerColaboradorNombre/{Nombre}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Colaborador>obtenerColaboradorNombre(@PathParam("Nombre")String Nombre){
-       
-        
         return ImpColaborador.obtenerColaboradorNombre(Nombre);
-    
- 
     }
     
     @GET
