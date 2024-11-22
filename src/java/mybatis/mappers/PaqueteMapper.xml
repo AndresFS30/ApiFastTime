@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<root>
+<mapper namespace="paquete">
     
-</root>
+    <select id="obtenerPaquete"  resultType="pojo.Paquete"> 
+    SELECT p.IdPaquete,p.NumeroGuia,p.DescripcionPaquete,p.Peso,p.Alto,p.Profundidad,p.Ancho,e.IdEnvio AS 'Envio'
+    FROM Paquetes p
+    INNER JOIN Envio e ON e.IdPaquete = p.IdPaquete;
+    </select>
+
+    <select id="obtenerPaqueteEnvio"  resultType="pojo.Paquete"> 
+    SELECT  p.IdPaquete,p.NumeroGuia,p.DescripcionPaquete,p.Peso,p.Alto,p.Profundidad,p.Ancho,e.IdEnvio AS 'Envio'
+    FROM Paquetes p
+    INNER JOIN Envio e ON e.IdPaquete = p.IdPaquete
+    WHERE e.IdEnvio = #{IdEnvio};
+    </select>
+    
+    <insert id="registrarPaquete" parameterType="pojo.Paquete" >
+        INSERT INTO Paquetes (NumeroGuia, DescripcionPaquete, Peso, Alto, Profundidad, Ancho, IdEnvio)
+        VALUES (#{NumeroGuia}, #{DescripcionPaquete}, #{Peso}, #{Alto}, #{Profundidad}, #{Ancho}, #{IdEnvio});
+
+    </insert>
+    
+   
+
+    <update id="editarPaquete" parameterType="pojo.Cliente"> 
+    UPDATE Paquetes
+    SET NumeroGuia = #{NumeroGuia}, DescripcionPaquete = #{DescripcionPaquete},Peso =#{Peso},Alto =#{Alto},Profundidad =#{Profundidad},Ancho =#{Ancho}
+    WHERE IdPaquete = #{IdPaquete}
+    </update>
+    
+    <delete id="eliminarPaqueteId" parameterType="pojo.Paquete">
+        DELETE
+        FROM Paquetes
+        WHERE IdPaquete = #{IdPaquete}
+    </delete>
+</mapper>
