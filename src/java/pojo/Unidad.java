@@ -10,81 +10,81 @@ package pojo;
  * @author afs30
  */
 public class Unidad {
-    private Integer idUnidad;
-    private String marca;
-    private String modelo;
-    private String anio;
-    private String vin;
-    private Integer idTipo;
-    private String nii;
+    private Integer IdUnidad;
+    private String Marca;
+    private String Modelo;
+    private String Anio;
+    private String VIN;
+    private Integer IdTipo;
+    private String IdInterno;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String marca, String modelo, String anio, String vin, Integer idTipo, String nii) {
-        this.idUnidad = idUnidad;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.anio = anio;
-        this.vin = vin;
-        this.idTipo = idTipo;
-        this.nii = nii;
+    public Unidad(Integer IdUnidad, String Marca, String Modelo, String Anio, String VIN, Integer IdTipo, String IdInterno) {
+        this.IdUnidad = IdUnidad;
+        this.Marca = Marca;
+        this.Modelo = Modelo;
+        this.Anio = Anio;
+        this.VIN = VIN;
+        this.IdTipo = IdTipo;
+        this.IdInterno = IdInterno;
     }
 
     public Integer getIdUnidad() {
-        return idUnidad;
+        return IdUnidad;
     }
 
-    public void setIdUnidad(Integer idUnidad) {
-        this.idUnidad = idUnidad;
+    public void setIdUnidad(Integer IdUnidad) {
+        this.IdUnidad = IdUnidad;
     }
 
     public String getMarca() {
-        return marca;
+        return Marca;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setMarca(String Marca) {
+        this.Marca = Marca;
     }
 
     public String getModelo() {
-        return modelo;
+        return Modelo;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
     }
 
     public String getAnio() {
-        return anio;
+        return Anio;
     }
 
-    public void setAnio(String anio) {
-        this.anio = anio;
+    public void setAnio(String Anio) {
+        this.Anio = Anio;
     }
 
-    public String getVin() {
-        return vin;
+    public String getVIN() {
+        return VIN;
     }
 
-    public void setVin(String vin) {
-        this.vin = vin;
+    public void setVIN(String VIN) {
+        this.VIN = VIN;
     }
 
     public Integer getIdTipo() {
-        return idTipo;
+        return IdTipo;
     }
 
-    public void setIdTipo(Integer idTipo) {
-        this.idTipo = idTipo;
+    public void setIdTipo(Integer IdTipo) {
+        this.IdTipo = IdTipo;
     }
 
-    public String getNii() {
-        return nii;
+    public String getIdInterno() {
+        return IdInterno;
     }
 
-    public void setNii(String nii) {
-        this.nii = nii;
+    public void setIdInterno(String IdInterno) {
+        this.IdInterno = IdInterno;
     }
 
    

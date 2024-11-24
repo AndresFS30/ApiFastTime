@@ -5,10 +5,120 @@
  */
 package ws;
 
+import com.google.gson.Gson;
+import dominio.ImpColaborador;
+import dominio.ImpUnidad;
+import java.util.List;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
+import pojo.Colaborador;
+import pojo.Mensaje;
+import pojo.Unidad;
+
 /**
  *
  * @author afs30
  */
+
+@Path("unidad")
 public class WSUnidad {
+        @Context
+    private UriInfo context;
+        
+    public WSUnidad(){
+    }
+
+    @Path("obtenerUnidad")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerUnidad(){
     
+        return ImpUnidad.obtenerUnidad();
+        
+    }
+    
+    @GET
+    @Path("obtenerUnidadVIN/{VIN}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad>obtenerUnidadVIN(@PathParam("VIN")String VIN){
+       
+        
+        return ImpUnidad.obtenerUnidadVIN(VIN);
+    
+ 
+    }
+    
+    @GET
+    @Path("obtenerUnidadMarca/{Marca}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad>obtenerUnidadMarca(@PathParam("Marca")String Marca){
+       
+        
+        return ImpUnidad.obtenerUnidadMarca(Marca);
+    
+ 
+    }
+    
+    @GET
+    @Path("obtenerUnidadIdInterno/{IdInterno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad>obtenerUnidadIdInterno(@PathParam("IdInterno")String IdInterno){
+       
+        
+        return ImpUnidad.obtenerUnidadIdInterno(IdInterno);
+    
+ 
+    }
+    
+    
+    @Path("registrarUnidad")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje registrarUnidad(String jsonUnidad){
+        
+       try{
+       Gson gson = new Gson();
+        Unidad unidad = gson.fromJson(jsonUnidad, Unidad.class);
+        return ImpUnidad.registrarUnidad(unidad);
+       
+       }catch(Exception e){
+        e.printStackTrace();
+        throw new BadRequestException();
+       }
+        
+    }
+    
+    @Path("editarUnidad")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje editarUnidad(String jsonUnidad){
+        try{
+        Gson gson = new Gson();
+        Unidad unidad = gson.fromJson(jsonUnidad, Unidad.class);
+        return ImpUnidad.editarUnidad(unidad);
+        }catch( Exception e){
+            e.printStackTrace();
+            throw new BadRequestException();
+        }
+    }
+    
+    @Path("eliminarUnidad")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje eliminarUnidad(@QueryParam("IdUnidad") Integer IdUnidad) {
+        return ImpUnidad.eliminarUnidad(IdUnidad);
+    }
 }

@@ -21,3 +21,14 @@ http://localhost:8084/WSFastTime/ws/paquete/obtenerPaqueteEnvio/2
 http://localhost:8084/WSFastTime/ws/paquete/registrarPaquete
 http://localhost:8084/WSFastTime/ws/paquete/editarPaquete
 http://localhost:8084/WSFastTime/ws/paquete/eliminarPaquete?IdPaquete=1002
+
+
+http://localhost:8084/WSFastTime/ws/unidad/obtenerUnidad
+http://localhost:8084/WSFastTime/ws/unidad/obtenerUnidadIdInterno/U003
+http://localhost:8084/WSFastTime/ws/unidad/registrarUnidad
+http://localhost:8084/WSFastTime/ws/unidad/editarUnidad
+http://localhost:8084/WSFastTime/ws/unidad/eliminarUnidad?IdUnidad=1002
+
+http://localhost:8084/WSFastTime/ws/login/colaborador
+
+
