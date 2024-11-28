@@ -32,3 +32,10 @@ http://localhost:8084/WSFastTime/ws/unidad/eliminarUnidad?IdUnidad=1002
 http://localhost:8084/WSFastTime/ws/login/colaborador
 
 
+http://localhost:8084/WSFastTime/ws/envio/obtenerEnvio
+http://localhost:8084/WSFastTime/ws/envio/obtenerEnvioNoGuia/PAQ1234567890
+http://localhost:8084/WSFastTime/ws/envio/registrarEnvio
+http://localhost:8084/WSFastTime/ws/envio/editarEnvio
+http://localhost:8084/WSFastTime/ws/envio/eliminarEnvio?IdEnvio=1002
+
+

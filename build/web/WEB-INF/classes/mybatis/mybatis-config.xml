@@ -12,8 +12,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <dataSource type="UNPOOLED">
     <property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
     <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=timeFast"/>
-    <property name="username" value="Andy"/>
-    <property name="password" value="Andy1996"/>
+    <property name="username" value="timeFast"/>
+    <property name="password" value="Tim3F@s7"/>
 </dataSource>
 
     </environment>
@@ -26,6 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="mybatis/mappers/PaqueteMapper.xml"/>
     <mapper resource="mybatis/mappers/UnidadMapper.xml"/>
     <mapper resource="mybatis/mappers/LoginMapper.xml"/>
+    <mapper resource="mybatis/mappers/EnvioMapper.xml"/>
+    <mapper resource="mybatis/mappers/AsociacionVehicularMapper.xml"/>
 </mappers>
 
 </configuration>
