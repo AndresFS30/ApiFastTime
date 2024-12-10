@@ -8,13 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="obtenerEnvio" resultType="pojo.Envio">
     SELECT e.IdEnvio, e.Costo, e.IdOrigen, e.IdDestino, e.IdPaquete, e.IdCliente, e.Status, p.NumeroGuia AS 'NoGuia',
     CONCAT(dc.Calle,' ',dc.Numero,' ',dc.Colonia,' ',dc.CodigoPostal,' ',dc.Ciudad,' ',dc.Estado) AS Cliente,
-    CONCAT(do.Calle,' ',do.Numero,' ',do.Colonia,' ',do.CodigoPostal,' ',do.Ciudad,' ',do.Estado) AS Origen,
+    CONCAT(do.Calle,' ',do.Numero,' ',do.Colonia,' ',do.CodigoPostal,' ',do.Ciudad,'',do.Estado) AS Origen,
     CONCAT(dd.Calle,' ',dd.Numero,' ',dd.Colonia,' ',dd.CodigoPostal,' ',dd.Ciudad,' ',dd.Estado) AS Destino
     FROM Envio e
     INNER JOIN DireccionCliente dc ON dc.IdDireccion =e.IdCliente
     INNER JOIN DireccionOrigen do ON do.IdOrigen = e.IdOrigen
     INNER JOIN DireccionDestino dd ON dd.IdDestino = e.IdDestino
-    INNER JOIN Paquetes p ON  p.IdPaquete = e.IdPaquete;
+    INNER JOIN Paquete p ON  p.IdPaquete = e.IdPaquete;
+
     </select>
     <select id="obtenerEnvioNoGuia" resultType="pojo.Envio">
     SELECT e.IdEnvio, e.Costo, e.IdOrigen, e.IdDestino, e.IdPaquete, e.IdCliente, e.Status, p.NumeroGuia AS 'NoGuia',
@@ -25,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     INNER JOIN DireccionCliente dc ON dc.IdDireccion =e.IdCliente
     INNER JOIN DireccionOrigen do ON do.IdOrigen = e.IdOrigen
     INNER JOIN DireccionDestino dd ON dd.IdDestino = e.IdDestino
-    INNER JOIN Paquetes p ON  p.IdPaquete = e.IdPaquete
+    INNER JOIN Paquete p ON  p.IdPaquete = e.IdPaquete
     WHERE p.NumeroGuia = #{NumeroGuia};
     </select>
     

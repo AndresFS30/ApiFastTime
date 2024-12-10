@@ -6,33 +6,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="colaborador">
     
     <select id="obtenerColaborador" resultType="pojo.Colaborador">
-    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia AS 'NoLicencia'
-    FROM  Colaborador c
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal
+    FROM  colaborador c
     INNER JOIN Rol r ON r.IdRol = c.IdRol
-    INNER JOIN Conductor con ON con.IdColaborador = c.IdColaborador;
     </select>
 
     <select id="obtenerColaboradorNombre"  resultType="pojo.Colaborador">
-    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia AS 'NoLicencia'
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal
     FROM  Colaborador c
     INNER JOIN Rol r ON r.IdRol = c.IdRol
-    INNER JOIN Conductor con ON con.IdColaborador = c.IdColaborador
     WHERE c.Nombre = #{Nombre};
     </select>
 
     <select id="obtenerColaboradorNoPersonal"  resultType="pojo.Colaborador">
-    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia AS 'NoLicencia'
-    FROM  Colaborador c
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal
+    FROM  colaborador c
     INNER JOIN Rol r ON r.IdRol = c.IdRol
-    INNER JOIN Conductor con ON con.IdColaborador = c.IdColaborador
     WHERE c.NoPersonal = #{NoPersonal};
     </select>
     
     <select id="obtenerColaboradorRol"  resultType="pojo.Colaborador">
-    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia AS 'NoLicencia'
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal
     FROM  Colaborador c
     INNER JOIN Rol r ON r.IdRol = c.IdRol
-    INNER JOIN Conductor con ON con.IdColaborador = c.IdColaborador
     WHERE r.DescripcionRol = #{Rol};
     </select>
     
@@ -44,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
     <update id="editarColaborador" parameterType="pojo.Colaborador">
-    UPDATE Colaborador
+    UPDATE colaborador
     SET  Nombre = #{Nombre}, ApellidoPaterno = #{ApellidoPaterno}, ApellidoMaterno = #{ApellidoMaterno},CURP = #{CURP},Correo = #{Correo},Password = #{Password}
     WHERE IdColaborador = #{IdColaborador};
     </update>
@@ -60,4 +56,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM Colaborador
         WHERE IdColaborador = #{IdColaborador}
     </delete>
+    
+    <update id="guardarFoto" parameterType="map"> 
+    UPDATE colaborador
+    SET Foto = #{Foto}
+    WHERE IdColaborador = #{IdColaborador};
+    </update>
+     
+    <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
+    SELECT IdColaborador, c.Nombre, c.ApellidoPaterno, c.ApellidoMaterno, 
+           TO_BASE64(Foto) as fotoBase64
+    FROM colaborador c
+    WHERE c.IdColaborador = #{IdColaborador};
+    </select>
+
+    
 </mapper>

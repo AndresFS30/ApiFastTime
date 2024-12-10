@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="obtenerUnidad" resultType="pojo.Unidad">
     SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo;
+    INNER JOIN TipoUnidad t ON t.IdTipo = u.IdTipo;
     </select> 
     <select id="obtenerUnidadVIN" resultType="pojo.Unidad">
     SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo

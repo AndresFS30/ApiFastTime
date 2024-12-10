@@ -204,4 +204,50 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
      }
     return msj;
     }
+    
+    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Foto){
+    Mensaje msj = new Mensaje();
+     LinkedHashMap<String, Object> parametros = new LinkedHashMap<>();
+        parametros.put("IdColaborador", IdColaborador);
+        parametros.put("Foto", Foto);
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD != null){
+        try{
+         int filasAfectadas = conexionBD.update("colaborador.guardarFoto",parametros);
+         conexionBD.commit();
+          if(filasAfectadas >0){
+           msj.setError(false);
+           msj.setMensaje("foto guardada correctamente en la base ");
+          }else{
+           msj.setError(true);
+           msj.setMensaje("No se pudo realizar el guardado de la foto");
+          }
+            
+        }catch(Exception e){
+        
+         msj.setError(true);
+         msj.setMensaje(e.getMessage());
+        }
+            
+        }else{
+        
+         msj.setError(true);
+           msj.setMensaje("No se pudo establecer conexión a la base de datos");
+        
+        }
+        return msj;   
+    }
+    
+    public static Colaborador obtenerFoto(Integer IdColaborador){
+     Colaborador colaborador = null;
+     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+     if(conexionBD != null){
+         try{
+           colaborador = conexionBD.selectOne("colaborador.obtenerFoto",IdColaborador);
+         }catch(Exception e){
+             e.printStackTrace();
+         }
+     }
+     return colaborador;
+    }
 }

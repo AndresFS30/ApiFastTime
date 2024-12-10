@@ -7,7 +7,6 @@
 package ws;
 
 import com.google.gson.Gson;
-import dominio.ImpCliente;
 import dominio.ImpColaborador;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
@@ -136,5 +135,28 @@ public class WSColaborador {
        }
         
     }
+    
+    @Path("subirFoto/{IdColaborador}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje subirFoto(@PathParam("IdColaborador")Integer IdColaborador,
+                                        byte[] Foto){
+        if(IdColaborador != null && IdColaborador>0 && Foto != null){
+         return ImpColaborador.registrarFoto(IdColaborador,Foto);
+        }
+       throw new BadRequestException();
+   }
+    
+  @Path("obtenerFoto/{IdColaborador}")
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+   public Colaborador obtenerFoto(@PathParam("IdColaborador")Integer IdColaborador){
+       if(IdColaborador != null && IdColaborador > 0){
+           
+           return ImpColaborador.obtenerFoto(IdColaborador);
+       }
+   
+       throw new BadRequestException();
+   }
     
 }
