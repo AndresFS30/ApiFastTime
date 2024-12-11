@@ -51,32 +51,37 @@ public class WSColaborador {
     
     
     @GET
-    @Path("obtenerColaboradorNombre/{Nombre}")
+    @Path("obtenerColaboradorNombre/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorNombre(@PathParam("Nombre")String Nombre){
-        return ImpColaborador.obtenerColaboradorNombre(Nombre);
+    public List<Colaborador>obtenerColaboradorNombre(@PathParam("nombre")String nombre){
+        if( (nombre != null) && !(nombre.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNombre(nombre);
+        }
+        throw new BadRequestException();
+        
     }
     
     @GET
-    @Path("obtenerColaboradorNoPersonal/{NoPersonal}")
+    @Path("obtenerColaboradorNoPersonal/{noPersonal}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorNoPersonal(@PathParam("NoPersonal")String NoPersonal){
+    public List<Colaborador>obtenerColaboradorNoPersonal(@PathParam("noPersonal")String noPersonal){
        
-        
-        return ImpColaborador.obtenerColaboradorNoPersonal(NoPersonal);
-    
- 
+        if( (noPersonal != null) && !(noPersonal.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNoPersonal(noPersonal);
+        }
+        throw new BadRequestException();
     }
     
     @GET
-    @Path("obtenerColaboradorRol/{Rol}")
+    @Path("obtenerColaboradorRol/{rol}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorRol(@PathParam("Rol")String Rol){
+    public List<Colaborador>obtenerColaboradorRol(@PathParam("rol")String rol){
        
+        if((rol != null) && !(rol.isEmpty())){
+            return ImpColaborador.obtenerColaboradorRol(rol);
+        }
+        throw new BadRequestException();
         
-        return ImpColaborador.obtenerColaboradorRol(Rol);
-    
- 
     }
     
     @Path("registrarColaborador")
@@ -115,8 +120,11 @@ public class WSColaborador {
     @Path("eliminarColaborador")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarColaborador(@QueryParam("IdColaborador") Integer IdColaborador) {
-        return ImpColaborador.eliminarColaborador(IdColaborador);
+    public Mensaje eliminarColaborador(@QueryParam("idColaborador") Integer idColaborador) {
+        if((idColaborador != null) && (idColaborador > 0)){
+            return ImpColaborador.eliminarColaborador(idColaborador);
+        }
+        throw new BadRequestException();
     }
     
     @Path("actualizarConductor")

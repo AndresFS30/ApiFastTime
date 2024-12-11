@@ -49,34 +49,36 @@ public class WSUnidad {
     }
     
     @GET
-    @Path("obtenerUnidadVIN/{VIN}")
+    @Path("obtenerUnidadVIN/{vIN}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadVIN(@PathParam("VIN")String VIN){
-       
-        
-        return ImpUnidad.obtenerUnidadVIN(VIN);
-    
- 
+    public List<Unidad>obtenerUnidadVIN(@PathParam("vIN")String vIN){
+       if((vIN != null) && !(vIN.isEmpty())){
+           return ImpUnidad.obtenerUnidadVIN(vIN);
+       } 
+        throw new BadRequestException();
     }
     
     @GET
-    @Path("obtenerUnidadMarca/{Marca}")
+    @Path("obtenerUnidadMarca/{marca}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadMarca(@PathParam("Marca")String Marca){
+    public List<Unidad>obtenerUnidadMarca(@PathParam("marca")String marca){
        
-        
-        return ImpUnidad.obtenerUnidadMarca(Marca);
-    
- 
+       if((marca != null) && !(marca.isEmpty())){
+           return ImpUnidad.obtenerUnidadMarca(marca);
+       } 
+        throw new BadRequestException();
     }
     
     @GET
-    @Path("obtenerUnidadIdInterno/{IdInterno}")
+    @Path("obtenerUnidadIdInterno/{idInterno}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadIdInterno(@PathParam("IdInterno")String IdInterno){
+    public List<Unidad>obtenerUnidadIdInterno(@PathParam("idInterno")String idInterno){
        
-        
-        return ImpUnidad.obtenerUnidadIdInterno(IdInterno);
+        if((idInterno != null) && !(idInterno.isEmpty())){
+            
+        return ImpUnidad.obtenerUnidadIdInterno(idInterno);
+       } 
+        throw new BadRequestException();
     
  
     }
@@ -118,7 +120,10 @@ public class WSUnidad {
     @Path("eliminarUnidad")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarUnidad(@QueryParam("IdUnidad") Integer IdUnidad) {
-        return ImpUnidad.eliminarUnidad(IdUnidad);
+    public Mensaje eliminarUnidad(@QueryParam("idUnidad") Integer idUnidad) {
+        if((idUnidad != null) && (idUnidad > 0)){
+            return ImpUnidad.eliminarUnidad(idUnidad);
+        }
+        throw new BadRequestException();
     }
 }
