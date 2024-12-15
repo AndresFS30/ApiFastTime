@@ -13,7 +13,7 @@ public class Unidad {
     private Integer IdUnidad;
     private String Marca;
     private String Modelo;
-    private String Anio;
+    private String Año;
     private String VIN;
     private Integer IdTipo;
     private String IdInterno;
@@ -21,11 +21,11 @@ public class Unidad {
     public Unidad() {
     }
 
-    public Unidad(Integer IdUnidad, String Marca, String Modelo, String Anio, String VIN, Integer IdTipo, String IdInterno) {
+    public Unidad(Integer IdUnidad, String Marca, String Modelo, String Año, String VIN, Integer IdTipo, String IdInterno) {
         this.IdUnidad = IdUnidad;
         this.Marca = Marca;
         this.Modelo = Modelo;
-        this.Anio = Anio;
+        this.Año = Año;
         this.VIN = VIN;
         this.IdTipo = IdTipo;
         this.IdInterno = IdInterno;
@@ -55,12 +55,12 @@ public class Unidad {
         this.Modelo = Modelo;
     }
 
-    public String getAnio() {
-        return Anio;
+    public String getAño() {
+        return Año;
     }
 
-    public void setAnio(String Anio) {
-        this.Anio = Anio;
+    public void setAño(String Año) {
+        this.Año = Año;
     }
 
     public String getVIN() {
@@ -87,5 +87,6 @@ public class Unidad {
         this.IdInterno = IdInterno;
     }
 
+    
    
 }
