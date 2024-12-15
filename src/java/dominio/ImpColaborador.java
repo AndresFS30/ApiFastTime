@@ -205,11 +205,11 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     return msj;
     }
     
-    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Foto){
+    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Fotografia){
     Mensaje msj = new Mensaje();
      LinkedHashMap<String, Object> parametros = new LinkedHashMap<>();
         parametros.put("IdColaborador", IdColaborador);
-        parametros.put("Foto", Foto);
+        parametros.put("Fotografia", Fotografia);
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD != null){
         try{

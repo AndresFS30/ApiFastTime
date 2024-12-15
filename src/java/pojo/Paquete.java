@@ -22,12 +22,13 @@ public class Paquete {
     private Float Profundidad;
     private Integer IdEnvio;
     private String Envio;
+    private String Status;
    
 
     public Paquete() {
     }
 
-    public Paquete(Integer IdPaquete, String NumeroGuia, String DescripcionPaquete, Float Peso, String Dimensiones, Float Alto, Float Ancho, Float Profundidad, Integer IdEnvio, String Envio) {
+    public Paquete(Integer IdPaquete, String NumeroGuia, String DescripcionPaquete, Float Peso, String Dimensiones, Float Alto, Float Ancho, Float Profundidad, Integer IdEnvio, String Envio, String Status) {
         this.IdPaquete = IdPaquete;
         this.NumeroGuia = NumeroGuia;
         this.DescripcionPaquete = DescripcionPaquete;
@@ -38,6 +39,7 @@ public class Paquete {
         this.Profundidad = Profundidad;
         this.IdEnvio = IdEnvio;
         this.Envio = Envio;
+        this.Status = Status;
     }
 
     public Integer getIdPaquete() {
@@ -118,6 +120,14 @@ public class Paquete {
 
     public void setEnvio(String Envio) {
         this.Envio = Envio;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
     }
 
     

@@ -46,10 +46,13 @@ public class WSPaquete {
     }
     
     @GET
-    @Path("obtenerPaqueteEnvio/{IdEnvio}")
+    @Path("obtenerPaqueteNoGuia/{NumeroGuia}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Paquete>obtenerPaqueteEnvio(@PathParam("IdEnvio")Integer IdEnvio){
-        return ImpPaquete.obtenerPaqueteEnvio(IdEnvio);
+    public List<Paquete>obtenerPaqueteNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
+        if(NumeroGuia != null){
+            return ImpPaquete.obtenerPaqueteNoGuia(NumeroGuia);
+        }
+        throw new BadRequestException();
     }
     
     @Path("registrarPaquete")
@@ -89,7 +92,10 @@ public class WSPaquete {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarPaquete(@QueryParam("IdPaquete") Integer IdPaquete) {
-        return ImpPaquete.eliminarPaquete(IdPaquete);
+      if((IdPaquete != null) && (IdPaquete > 0)){
+            return ImpPaquete.eliminarPaquete(IdPaquete);
+        }
+        throw new BadRequestException();
     }
     
 }

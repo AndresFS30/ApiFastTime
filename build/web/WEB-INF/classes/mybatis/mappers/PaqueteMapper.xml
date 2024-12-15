@@ -6,35 +6,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     
     <select id="obtenerPaquete"  resultType="pojo.Paquete"> 
-    SELECT p.IdPaquete,p.NumeroGuia,p.DescripcionPaquete,p.Peso,p.Alto,p.Profundidad,p.Ancho,p.IdEnvio AS 'Envio'
-    FROM Paquete p
-    INNER JOIN Envio e ON e.IdEnvio = p.IdEnvio;
+    SELECT se.Status, CONCAT(d.Calle, ' ', d.Numero, ' ', d.Colonia, ' ', d.CodigoPostal) AS Origen, CONCAT(d2.Calle, ' ', d2.Numero, ' ', d2.Colonia, ' ', d2.CodigoPostal, ' ', d2.Estado, ' ', d2.Ciudad) AS Destino,
+    p.DescripcionPaquete,c.Nombre,e.NumeroGuia,p.Peso,p.Alto,p.Profundidad,p.Ancho
+    FROM  Statusenvio se
+    INNER JOIN Envio e ON e.IdEnvio = se.IdEnvio
+    INNER JOIN Direccionorigen d ON d.IdOrigen = e.IdOrigen
+    INNER JOIN DireccionDestino d2 ON d2.IdDestino = e.IdDestino
+    INNER JOIN Paquete p ON p.IdPaquete = e.IdPaquete
+    INNER JOIN Cliente c ON c.IdCliente = e.IdCliente;
     </select>
 
-    <select id="obtenerPaqueteEnvio"  resultType="pojo.Paquete"> 
-    SELECT  p.IdPaquete,p.NumeroGuia,p.DescripcionPaquete,p.Peso,p.Alto,p.Profundidad,p.Ancho,e.IdEnvio AS 'Envio'
-    FROM Paquete p
-    INNER JOIN Envio e ON e.IdEnvio = p.IdEnvio
-    WHERE e.IdEnvio = #{IdEnvio};
+    <select id="obtenerPaqueteNoGuia"  resultType="pojo.Paquete"> 
+    SELECT se.Status, CONCAT(d.Calle, ' ', d.Numero, ' ', d.Colonia, ' ', d.CodigoPostal) AS Origen, CONCAT(d2.Calle, ' ', d2.Numero, ' ', d2.Colonia, ' ', d2.CodigoPostal, ' ', d2.Estado, ' ', d2.Ciudad) AS Destino,
+    p.DescripcionPaquete,c.Nombre,e.NumeroGuia,p.Peso,p.Alto,p.Profundidad,p.Ancho
+    FROM  Statusenvio se
+    INNER JOIN Envio e ON e.IdEnvio = se.IdEnvio
+    INNER JOIN Direccionorigen d ON d.IdOrigen = e.IdOrigen
+    INNER JOIN DireccionDestino d2 ON d2.IdDestino = e.IdDestino
+    INNER JOIN Paquete p ON p.IdPaquete = e.IdPaquete
+    INNER JOIN Cliente c ON c.IdCliente = e.IdCliente
+    WHERE e.NumeroGuia = #{NumeroGuia};
+    
     </select>
     
     <insert id="registrarPaquete" parameterType="pojo.Paquete" >
-        INSERT INTO Paquete (NumeroGuia, DescripcionPaquete, Peso, Alto, Profundidad, Ancho, IdEnvio)
-        VALUES (#{NumeroGuia}, #{DescripcionPaquete}, #{Peso}, #{Alto}, #{Profundidad}, #{Ancho}, #{IdEnvio});
+        INSERT INTO Paquete ( DescripcionPaquete, Peso, Alto, Profundidad, Ancho, IdEnvio)
+        VALUES (#{DescripcionPaquete}, #{Peso}, #{Alto}, #{Profundidad}, #{Ancho}, #{IdEnvio});
 
     </insert>
     
    
 
-    <update id="editarPaquete" parameterType="pojo.Cliente"> 
+    <update id="editarPaquete" parameterType="pojo.Paquete"> 
     UPDATE Paquete
-    SET NumeroGuia = #{NumeroGuia}, DescripcionPaquete = #{DescripcionPaquete},Peso =#{Peso},Alto =#{Alto},Profundidad =#{Profundidad},Ancho =#{Ancho}
-    WHERE IdPaquete = #{IdPaquete}
+    SET  DescripcionPaquete = #{DescripcionPaquete},Peso =#{Peso},Alto =#{Alto},Profundidad =#{Profundidad},Ancho =#{Ancho}
+    WHERE IdPaquete = #{IdPaquete};
     </update>
     
     <delete id="eliminarPaqueteId" parameterType="pojo.Paquete">
         DELETE
         FROM Paquete
-        WHERE IdPaquete = #{IdPaquete}
+        WHERE IdPaquete = #{IdPaquete};
     </delete>
 </mapper>

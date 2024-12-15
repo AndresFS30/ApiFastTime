@@ -6,10 +6,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="sesion">
     <select id="loginColaborador" resultType="pojo.Colaborador">
-     SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal
-     FROM  Colaborador c
-     INNER JOIN Rol r ON r.IdRol = c.IdRol
-     WHERE NoPersonal = #{NoPersonal} AND Password = #{Password};
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia
+    FROM  colaborador c
+    INNER JOIN Rol r ON r.IdRol = c.IdRol
+    LEFT JOIN conductor con ON con.IdColaborador = c.IdColaborador
+    WHERE NoPersonal = #{NoPersonal} AND Password = #{Password};
     </select>
     
 </mapper>

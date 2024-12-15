@@ -27,6 +27,20 @@ public class Envio {
     private String Costo;
     private String Status;
     private String Cliente;
+     private Integer idStatus;
+
+    public Envio(Integer idStatus) {
+        this.idStatus = idStatus;
+    }
+
+    public Integer getIdStatus() {
+        return idStatus;
+    }
+
+    public void setIdStatus(Integer idStatus) {
+        this.idStatus = idStatus;
+    }
+  
 
     public Envio() {
     }

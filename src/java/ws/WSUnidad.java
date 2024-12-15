@@ -53,8 +53,10 @@ public class WSUnidad {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Unidad>obtenerUnidadVIN(@PathParam("VIN")String VIN){
        
-        
-        return ImpUnidad.obtenerUnidadVIN(VIN);
+        if((VIN != null) && !(VIN.isEmpty())){
+           return ImpUnidad.obtenerUnidadVIN(VIN);
+       } 
+        throw new BadRequestException();
     
  
     }
@@ -64,8 +66,10 @@ public class WSUnidad {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Unidad>obtenerUnidadMarca(@PathParam("Marca")String Marca){
        
-        
-        return ImpUnidad.obtenerUnidadMarca(Marca);
+        if((Marca != null) && !(Marca.isEmpty())){
+           return ImpUnidad.obtenerUnidadMarca(Marca);
+       } 
+        throw new BadRequestException();
     
  
     }
@@ -75,8 +79,11 @@ public class WSUnidad {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Unidad>obtenerUnidadIdInterno(@PathParam("IdInterno")String IdInterno){
        
-        
+        if((IdInterno != null) && !(IdInterno.isEmpty())){
+            
         return ImpUnidad.obtenerUnidadIdInterno(IdInterno);
+       } 
+        throw new BadRequestException();
     
  
     }
@@ -119,6 +126,9 @@ public class WSUnidad {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarUnidad(@QueryParam("IdUnidad") Integer IdUnidad) {
-        return ImpUnidad.eliminarUnidad(IdUnidad);
+               if((IdUnidad != null) && (IdUnidad > 0)){
+            return ImpUnidad.eliminarUnidad(IdUnidad);
+        }
+        throw new BadRequestException();
     }
 }

@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 import pojo.Colaborador;
 import pojo.Envio;
 import pojo.Mensaje;
+import pojo.StatusEnvio;
 
 /**
  *
@@ -56,6 +57,27 @@ public static List<Envio> obtenerEnvioNoGuia(String NumeroGuia) {
     }
     return lista;
 }   
+
+
+public static List<Envio> obtenerEstatus(Integer IdEnvio) {
+    List<Envio> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, Integer> parametros = new LinkedHashMap<>();
+                parametros.put("IdEnvio", IdEnvio);
+            lista = conexionBD.selectList("envio.obtenerEstatus", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}  
+
+
 
 public static Mensaje registrarEnvio(Envio envio){
      Mensaje msj = new Mensaje();
@@ -141,5 +163,32 @@ public static Mensaje registrarEnvio(Envio envio){
          respuesta.setMensaje("Por el momento no se puede consultar la informacion");
     }
     return respuesta ;
+    }
+    
+    public static Mensaje cambiarEstatus(StatusEnvio estatus){
+     Mensaje msj = new Mensaje();
+     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+     if(conexionBD!= null){
+         try{
+         int resultado =conexionBD.insert("envio.cambiarStatus", estatus);
+         conexionBD.commit();
+         if(resultado > 0){
+             msj.setError(false);
+             msj.setMensaje("Estatus cambiado con exito");
+         }else{
+             msj.setError(true);
+             msj.setMensaje("no se pudo cambiar el estatus, intentarlo mas tarde.");
+         }
+         }catch(Exception e){
+         msj.setError(true);
+         msj.setMensaje(e.getMessage());
+         }finally{
+        conexionBD.close();
+        }
+     }else{
+         msj.setError(true);
+         msj.setMensaje("No se pudo establecer conexión a la base de datos");
+     }
+    return msj;
     }
 }

@@ -49,7 +49,10 @@ public class WSCliente {
     @Path("obtenerClienteNombre/{Nombre}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente>obtenerClienteNombre(@PathParam("Nombre")String Nombre){
-        return ImpCliente.obtenerClienteNombre(Nombre);
+         if( (Nombre != null) && !(Nombre.isEmpty())){
+            return ImpCliente.obtenerClienteNombre(Nombre);
+        }
+        throw new BadRequestException();
     }
     
     
@@ -57,7 +60,10 @@ public class WSCliente {
     @Path("obtenerClienteTelefono/{Telefono}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente>obtenerClienteTelefono(@PathParam("Telefono")String Telefono){
-        return ImpCliente.obtenerClienteTelefono(Telefono);
+        if( (Telefono != null) && !(Telefono.isEmpty())){
+            return ImpCliente.obtenerClienteTelefono(Telefono);
+        }
+        throw new BadRequestException();
     }
     
     
@@ -65,7 +71,10 @@ public class WSCliente {
     @Path("obtenerClienteCorreo/{Correo}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente>obtenerClienteCorreo(@PathParam("Correo")String Correo){
-        return ImpCliente.obtenerClienteCorreo(Correo);
+      if( (Correo != null) && !(Correo.isEmpty())){
+            return ImpCliente.obtenerClienteCorreo(Correo);
+        }
+        throw new BadRequestException();
     }
     
     
@@ -106,7 +115,10 @@ public class WSCliente {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarCliente(@QueryParam("IdCliente") Integer IdCliente) {
-        return ImpCliente.eliminarCliente(IdCliente);
+         if((IdCliente != null) && (IdCliente > 0)){
+            return ImpCliente.eliminarCliente(IdCliente);
+        }
+        throw new BadRequestException();
     }
     
     @Path("registrarDireccion")

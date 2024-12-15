@@ -53,7 +53,10 @@ public class WSColaborador {
     @Path("obtenerColaboradorNombre/{Nombre}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Colaborador>obtenerColaboradorNombre(@PathParam("Nombre")String Nombre){
-        return ImpColaborador.obtenerColaboradorNombre(Nombre);
+                if( (Nombre != null) && !(Nombre.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNombre(Nombre);
+        }
+        throw new BadRequestException();
     }
     
     @GET
@@ -62,7 +65,10 @@ public class WSColaborador {
     public List<Colaborador>obtenerColaboradorNoPersonal(@PathParam("NoPersonal")String NoPersonal){
        
         
-        return ImpColaborador.obtenerColaboradorNoPersonal(NoPersonal);
+        if( (NoPersonal != null) && !(NoPersonal.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNoPersonal(NoPersonal);
+        }
+        throw new BadRequestException();
     
  
     }
@@ -72,8 +78,10 @@ public class WSColaborador {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Colaborador>obtenerColaboradorRol(@PathParam("Rol")String Rol){
        
-        
-        return ImpColaborador.obtenerColaboradorRol(Rol);
+        if((Rol != null) && !(Rol.isEmpty())){
+            return ImpColaborador.obtenerColaboradorRol(Rol);
+        }
+        throw new BadRequestException();
     
  
     }
@@ -115,7 +123,10 @@ public class WSColaborador {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarColaborador(@QueryParam("IdColaborador") Integer IdColaborador) {
-        return ImpColaborador.eliminarColaborador(IdColaborador);
+        if((IdColaborador != null) && (IdColaborador > 0)){
+            return ImpColaborador.eliminarColaborador(IdColaborador);
+        }
+        throw new BadRequestException();
     }
     
     @Path("actualizarConductor")

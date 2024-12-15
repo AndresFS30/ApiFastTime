@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import pojo.Envio;
 import pojo.Mensaje;
+import pojo.StatusEnvio;
 
 /**
  *
@@ -50,6 +51,15 @@ public class WSEnvio {
     public List<Envio>obtenerEnvioNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
         return ImpEnvio.obtenerEnvioNoGuia(NumeroGuia);
     }
+    
+    
+    @Path("obtenerEstatus/{IdEnvio}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio>obtenerEstatus(@PathParam("IdEnvio")Integer IdEnvio){
+        return ImpEnvio.obtenerEstatus(IdEnvio);
+    }
+    
     
     @Path("registrarEnvio")
     @POST
@@ -91,4 +101,22 @@ public class WSEnvio {
         return ImpEnvio.eliminarEnvio(IdEnvio);
     }
     
+    
+    @Path("cambiarEstatus")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje cambiarEstatus(String jsonEstatus){
+        
+       try{
+       Gson gson = new Gson();
+        StatusEnvio estatus = gson.fromJson(jsonEstatus, StatusEnvio.class);
+        return ImpEnvio.cambiarEstatus(estatus);
+       
+       }catch(Exception e){
+        e.printStackTrace();
+        throw new BadRequestException();
+       }
+        
+    }
 }
