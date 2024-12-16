@@ -24,7 +24,6 @@ public class Paquete {
     private String Envio;
     private String Status;
    
-
     public Paquete() {
     }
 
@@ -130,8 +129,5 @@ public class Paquete {
         this.Status = Status;
     }
 
-    
-
-    
-    
+   
 }
