@@ -27,14 +27,12 @@ public class Envio {
     private String Costo;
     private String Status;
     private String Cliente;
-    private Integer idStatus;
-    private String NumeroGuia;
-    private String Repartidor;
+     private Integer idStatus;
 
     public Envio() {
     }
 
-    public Envio(Integer IdEnvio, Integer IdCliente, Integer IdOrigen, Integer IdDestino, Integer IdPaquete, String Calle, Integer Numero, String Colonia, Integer CodigoPostal, String Ciudad, String Estado, String Destino, String Origen, String NoGuia, String Costo, String Status, String Cliente, Integer idStatus, String NumeroGuia, String Repartidor) {
+    public Envio(Integer IdEnvio, Integer IdCliente, Integer IdOrigen, Integer IdDestino, Integer IdPaquete, String Calle, Integer Numero, String Colonia, Integer CodigoPostal, String Ciudad, String Estado, String Destino, String Origen, String NoGuia, String Costo, String Status, String Cliente, Integer idStatus, String conductor) {
         this.IdEnvio = IdEnvio;
         this.IdCliente = IdCliente;
         this.IdOrigen = IdOrigen;
@@ -53,9 +51,33 @@ public class Envio {
         this.Status = Status;
         this.Cliente = Cliente;
         this.idStatus = idStatus;
-        this.NumeroGuia = NumeroGuia;
-        this.Repartidor = Repartidor;
+        this.conductor = conductor;
     }
+
+    public String getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
+    }
+     private String conductor;
+     
+
+    public Envio(Integer idStatus) {
+        this.idStatus = idStatus;
+    }
+
+    public Integer getIdStatus() {
+        return idStatus;
+    }
+
+    public void setIdStatus(Integer idStatus) {
+        this.idStatus = idStatus;
+    }
+  
+
+    
 
     public Integer getIdEnvio() {
         return IdEnvio;
@@ -192,31 +214,6 @@ public class Envio {
     public void setCliente(String Cliente) {
         this.Cliente = Cliente;
     }
-
-    public Integer getIdStatus() {
-        return idStatus;
-    }
-
-    public void setIdStatus(Integer idStatus) {
-        this.idStatus = idStatus;
-    }
-
-    public String getNumeroGuia() {
-        return NumeroGuia;
-    }
-
-    public void setNumeroGuia(String NumeroGuia) {
-        this.NumeroGuia = NumeroGuia;
-    }
-
-    public String getRepartidor() {
-        return Repartidor;
-    }
-
-    public void setRepartidor(String Repartidor) {
-        this.Repartidor = Repartidor;
-    }
-
     
 
 }

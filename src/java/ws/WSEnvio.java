@@ -60,14 +60,6 @@ public class WSEnvio {
         return ImpEnvio.obtenerEstatus(IdEnvio);
     }
     
-    @Path("obtenerEnvioNoLicencia/{NumeroLicencia}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio> obtenerEnvioNoLicencia(@PathParam("NumeroLicencia") String NumeroLicencia) {
-    return ImpEnvio.obtenerEnvioNoLicencia(NumeroLicencia);
-    }
-
-    
     
     @Path("registrarEnvio")
     @POST

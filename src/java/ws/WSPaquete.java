@@ -46,11 +46,11 @@ public class WSPaquete {
     }
     
     @GET
-    @Path("obtenerPaqueteNoGuia/{NumeroGuia}")
+    @Path("obtenerPaqueteEnvio/{IdEnvio}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Paquete>obtenerPaqueteNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
-        if(NumeroGuia != null){
-            return ImpPaquete.obtenerPaqueteNoGuia(NumeroGuia);
+    public List<Paquete>obtenerPaqueteEnvio(@PathParam("IdEnvio")Integer IdEnvio){
+        if((IdEnvio != null) && (IdEnvio > 0)){
+            return ImpPaquete.obtenerPaqueteEnvio(IdEnvio);
         }
         throw new BadRequestException();
     }

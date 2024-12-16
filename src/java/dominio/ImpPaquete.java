@@ -37,14 +37,14 @@ public class ImpPaquete {
     }
     return lista;
 }
-    public static List<Paquete> obtenerPaqueteNoGuia(String NumeroGuia) {
+    public static List<Paquete> obtenerPaqueteEnvio(Integer IdEnvio) {
     List<Paquete> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
-            HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("NumeroGuia", NumeroGuia);
-            lista = conexionBD.selectList("paquete.obtenerPaqueteNoGuia", parametros);
+            HashMap<String, Integer> parametros = new LinkedHashMap<>();
+            parametros.put("IdEnvio", IdEnvio);
+            lista = conexionBD.selectList("paquete.obtenerPaqueteEnvio", parametros);
  
         } catch (Exception e) {
         e.printStackTrace();
