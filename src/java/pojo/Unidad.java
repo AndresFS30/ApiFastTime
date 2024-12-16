@@ -10,25 +10,39 @@ package pojo;
  * @author afs30
  */
 public class Unidad {
+
+    
     private Integer IdUnidad;
     private String Marca;
     private String Modelo;
-    private String Año;
-    private String VIN;
+    private String anio;
+    private String vin;
     private Integer IdTipo;
     private String IdInterno;
+
+   
+
+    public String getTipoUnidad() {
+        return tipoUnidad;
+    }
+
+    public void setTipoUnidad(String tipoUnidad) {
+        this.tipoUnidad = tipoUnidad;
+    }
+    private String tipoUnidad;
 
     public Unidad() {
     }
 
-    public Unidad(Integer IdUnidad, String Marca, String Modelo, String Año, String VIN, Integer IdTipo, String IdInterno) {
+    public Unidad(Integer IdUnidad, String Marca, String Modelo, String anio, String vin, Integer IdTipo, String IdInterno, String tipoUnidad) {
         this.IdUnidad = IdUnidad;
         this.Marca = Marca;
         this.Modelo = Modelo;
-        this.Año = Año;
-        this.VIN = VIN;
+        this.anio = anio;
+        this.vin = vin;
         this.IdTipo = IdTipo;
         this.IdInterno = IdInterno;
+        this.tipoUnidad = tipoUnidad;
     }
 
     public Integer getIdUnidad() {
@@ -55,20 +69,20 @@ public class Unidad {
         this.Modelo = Modelo;
     }
 
-    public String getAño() {
-        return Año;
+    public String getanio() {
+        return anio;
     }
 
-    public void setAño(String Año) {
-        this.Año = Año;
+    public void setanio(String anio) {
+        this.anio = anio;
     }
 
-    public String getVIN() {
-        return VIN;
+    public String getVin() {
+        return vin;
     }
 
-    public void setVIN(String VIN) {
-        this.VIN = VIN;
+    public void setVin(String vin) {
+        this.vin = vin;
     }
 
     public Integer getIdTipo() {
@@ -88,5 +102,7 @@ public class Unidad {
     }
 
     
+
+   
    
 }

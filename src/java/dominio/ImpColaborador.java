@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Colaborador;
@@ -91,32 +92,39 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     return lista;
 }
 
-    public static Mensaje registrarColaborador(Colaborador colaborador){
-     Mensaje msj = new Mensaje();
-     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-     if(conexionBD!= null){
-         try{
-         int resultado =conexionBD.insert("colaborador.registrarColaborador", colaborador);
-         conexionBD.commit();
-         if(resultado > 0){
-             msj.setError(false);
-             msj.setMensaje("Colaborador registrado con exito");
-         }else{
-             msj.setError(true);
-             msj.setMensaje("no se pudo registrar al colaborador, intentarlo mas tarde.");
-         }
-         }catch(Exception e){
-         msj.setError(true);
-         msj.setMensaje(e.getMessage());
-         }finally{
-        conexionBD.close();
-        }
-     }else{
-         msj.setError(true);
-         msj.setMensaje("No se pudo establecer conexión a la base de datos");
-     }
-    return msj;
+    public static Mensaje registrarColaborador(Colaborador colaborador) {
+    SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+    Mensaje mensaje = new Mensaje();
+    try {
+        // Crear un mapa con los parámetros para el procedimiento almacenado
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("nombre", colaborador.getNombre());
+        parametros.put("apellidoPaterno", colaborador.getApellidoPaterno());
+        parametros.put("apellidoMaterno", colaborador.getApellidoMaterno());
+        parametros.put("curp", colaborador.getCurp());
+        parametros.put("correo", colaborador.getCorreo());
+        parametros.put("password", colaborador.getPassword());
+        parametros.put("idRol", colaborador.getIdRol());
+        parametros.put("noPersonal", colaborador.getNoPersonal());
+        parametros.put("numeroLicencia", colaborador.getNumeroLicencia());
+
+        // Llamar al procedimiento almacenado
+        session.insert("colaborador.registrarColaborador", parametros);
+        session.commit();
+
+        mensaje.setError(false);
+        mensaje.setMensaje("Colaborador registrado correctamente.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        session.rollback();
+        mensaje.setError(true);
+        mensaje.setMensaje("Error al registrar el colaborador: " + e.getMessage());
+    } finally {
+        session.close();
     }
+    return mensaje;
+}
+
     
     public static Mensaje editarColaborador( Colaborador colaborador){
     Mensaje respuesta = new Mensaje();
@@ -205,11 +213,11 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     return msj;
     }
     
-    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Fotografia){
+    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Foto){
     Mensaje msj = new Mensaje();
      LinkedHashMap<String, Object> parametros = new LinkedHashMap<>();
         parametros.put("IdColaborador", IdColaborador);
-        parametros.put("Fotografia", Fotografia);
+        parametros.put("Foto", Foto);
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD != null){
         try{
@@ -250,4 +258,7 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
      }
      return colaborador;
     }
+    
+     
+
 }

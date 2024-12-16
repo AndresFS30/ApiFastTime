@@ -6,9 +6,13 @@
             <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/mybatis/mappers/EnvioMapper.xml</file>
 <<<<<<< Updated upstream
             <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/ws/WSEnvio.java</file>
+<<<<<<< Updated upstream
 =======
             <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/pojo/Envio.java</file>
             <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/ws/WSEnvio.java</file>
+            <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/dominio/ImpEnvio.java</file>
+>>>>>>> Stashed changes
+=======
             <file>file:/C:/Users/afs30/Documents/NetBeansProjects/WSFastTime/src/java/dominio/ImpEnvio.java</file>
 >>>>>>> Stashed changes
         </group>

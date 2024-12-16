@@ -6,6 +6,7 @@
 package mybatis;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -32,4 +33,23 @@ public class MyBatisUtil {
         return conexionBD;
     }
     
+    private static SqlSessionFactory sqlSessionFactory;
+
+    static {
+        try {
+            String resource = "mybatis/mybatis-config.xml"; // Archivo de configuración de MyBatis
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al inicializar MyBatisUtils: " + e.getMessage());
+        }
+    }
+
+    public static SqlSessionFactory getSqlSessionFactory() {
+        return sqlSessionFactory;
+    }
 }
+
+    
+

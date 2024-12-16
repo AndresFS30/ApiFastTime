@@ -90,19 +90,18 @@ public class WSColaborador {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Mensaje registrarColaborador(String jsonColaborador){
-        
-       try{
-       Gson gson = new Gson();
+    public Mensaje registrarColaborador(String jsonColaborador) {
+    try {
+        Gson gson = new Gson();
         Colaborador colaborador = gson.fromJson(jsonColaborador, Colaborador.class);
-        return ImpColaborador.registrarColaborador(colaborador);
-       
-       }catch(Exception e){
-        e.printStackTrace();
-        throw new BadRequestException();
-       }
+
+            return ImpColaborador.registrarColaborador(colaborador);
         
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new Mensaje(true,"Error al registrar el colaborador: " + e.getMessage());
     }
+}
     
     @Path("editarColaborador")
     @PUT
@@ -119,10 +118,10 @@ public class WSColaborador {
         }
     }
     
-    @Path("eliminarColaborador")
+    @Path("eliminarColaborador/{idColaborador}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarColaborador(@QueryParam("IdColaborador") Integer IdColaborador) {
+    public Mensaje eliminarColaborador(@PathParam("idColaborador") Integer IdColaborador) {
         if((IdColaborador != null) && (IdColaborador > 0)){
             return ImpColaborador.eliminarColaborador(IdColaborador);
         }
