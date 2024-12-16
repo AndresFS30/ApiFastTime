@@ -78,6 +78,24 @@ public static List<Envio> obtenerEstatus(Integer IdEnvio) {
 }  
 
 
+public static List<Envio> obtenerEnvioNoLicencia(String NumeroLicencia) {
+    List<Envio> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+            parametros.put("NumeroLicencia", NumeroLicencia);
+            lista = conexionBD.selectList("envio.obtenerEnvioNoLicencia", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}   
+
 
 public static Mensaje registrarEnvio(Envio envio){
      Mensaje msj = new Mensaje();

@@ -32,7 +32,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE e.NumeroGuia = #{NumeroGuia};
    </select>
 
-    
+<select id="obtenerEnvioNoLicencia" resultType="pojo.Envio">
+    SELECT e.NumeroGuia, s.Status,
+           CONCAT(c2.nombre, ' ', c2.apellidoMaterno, ' ', c2.apellidoPaterno) AS `Repartidor`,
+           CONCAT(d2.Calle, ' ', d2.Numero, ' ', d2.Colonia, ' ', d2.CodigoPostal, ' ', d2.Estado, ' ', d2.Ciudad) AS `Destino`
+    FROM envio e
+    INNER JOIN direcciondestino d2 ON d2.IdDestino = e.IdDestino
+    INNER JOIN asociacionenvio a ON a.IdEnvio = e.IdEnvio
+    INNER JOIN statusenvio s ON s.IdEnvio = e.IdEnvio
+    INNER JOIN conductor c ON c.IdConductor = a.IdConductor
+    INNER JOIN colaborador c2 ON c2.IdColaborador = c.IdConductor
+    WHERE c.NumeroLicencia = #{NumeroLicencia};
+</select>
+
+     
     <select id="obtenerEstatus" resultType="pojo.Envio">
     SELECT se.idStatus, se.IdEnvio, se.Status
     FROM StatusEnvio se
