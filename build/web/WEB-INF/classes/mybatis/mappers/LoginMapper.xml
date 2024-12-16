@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sesion">
+    <select id="loginColaborador" resultType="pojo.Colaborador">
+     SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia ,c.NoPersonal
+     FROM  Colaborador c
+     INNER JOIN Rol r ON r.IdRol = c.IdRol
+     WHERE NoPersonal = #{NoPersonal} AND Password = #{Password};
+    </select>
+    
+</mapper>

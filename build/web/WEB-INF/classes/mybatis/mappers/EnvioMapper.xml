@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="envio">
+
+    <select id="obtenerEnvio" resultType="pojo.Envio">
+    SELECT  e.Costo,e.NumeroGuia AS 'NoGuia',
+		concat(c3.Nombre,' ' ,c3.ApellidoPaterno ,' ', c3.ApellidoMaterno ) as Conductor,
+		concat(c.Nombre ,' ',c.ApellidoPaterno ,' ',c.ApellidoMaterno ) as Cliente,
+        CONCAT(do.Calle, ' ', do.Numero, ' ', do.Colonia, ' ', do.CodigoPostal, ' ', do.Ciudad, ' ', do.Estado) AS Origen,
+        CONCAT(dd.Calle, ' ', dd.Numero, ' ', dd.Colonia, ' ', dd.CodigoPostal, ' ', dd.Ciudad, ' ', dd.Estado) AS Destino
+    FROM Envio e
+    INNER JOIN Cliente c ON c.IdCliente = e.IdCliente
+    INNER JOIN DireccionCliente dc ON dc.IdDireccion = c.IdDireccion
+    INNER JOIN DireccionOrigen do ON do.IdOrigen = e.IdOrigen
+    INNER JOIN DireccionDestino dd ON dd.IdDestino = e.IdDestino
+   	inner join asociacionenvio a on a.IdEnvio=e.IdEnvio
+  	inner join conductor c2 on c2.IdConductor =a.IdConductor 
+  	inner join colaborador c3 on c3.IdColaborador =c2.IdColaborador;
+   </select>
+
+   <select id="obtenerEnvioNoGuia" resultType="pojo.Envio">
+    SELECT e.IdEnvio, e.Costo, e.IdOrigen, e.IdDestino, e.IdPaquete, e.IdCliente, e.Status, e.NumeroGuia AS 'NoGuia',
+        CONCAT(dc.Calle, ' ', dc.Numero, ' ', dc.Colonia, ' ', dc.CodigoPostal, ' ', dc.Ciudad, ' ', dc.Estado) AS Cliente,
+        CONCAT(do.Calle, ' ', do.Numero, ' ', do.Colonia, ' ', do.CodigoPostal, ' ', do.Ciudad, ' ', do.Estado) AS Origen,
+        CONCAT(dd.Calle, ' ', dd.Numero, ' ', dd.Colonia, ' ', dd.CodigoPostal, ' ', dd.Ciudad, ' ', dd.Estado) AS Destino
+    FROM Envio e
+    INNER JOIN Cliente c ON c.IdCliente = e.IdCliente
+    INNER JOIN DireccionCliente dc ON dc.IdDireccion = c.IdDireccion
+    INNER JOIN DireccionOrigen do ON do.IdOrigen = e.IdOrigen
+    INNER JOIN DireccionDestino dd ON dd.IdDestino = e.IdDestino
+    WHERE e.NumeroGuia = #{NumeroGuia};
+   </select>
+
+    
+    <select id="obtenerEstatus" resultType="pojo.Envio">
+    SELECT se.idStatus, se.IdEnvio, se.Status
+    FROM StatusEnvio se
+    WHERE se.IdEnvio = #{IdEnvio};
+    </select>
+
+    <insert id="cambiarStatus" parameterType="map"> 
+      INSERT INTO statusenvio (IdEnvio, Status)
+      VALUES (#{IdEnvio},#{Status});
+   </insert>
+        
+    <insert id="registrarEnvio" parameterType="pojo.Envio" >
+     INSERT INTO Envio (Costo, IdOrigen, IdDestino, IdPaquete, IdCliente, Status)
+     VALUES (#{Costo}, #{IdOrigen}, #{IdDestino}, #{IdPaquete}, #{IdCliente}, #{Status});
+    </insert>
+
+    <update id="editarEnvio" parameterType="pojo.Envio">
+    UPDATE Envio
+    SET  Costo = #{Costo}, IdOrigen = #{IdOrigen}, IdDestino = #{IdDestino},IdPaquete = #{IdPaquete},IdCliente = #{IdCliente},Status = #{Status}
+    WHERE IdEnvio = #{IdEnvio};
+    </update>
+    
+    <delete id="eliminarEnvioId" parameterType="pojo.Envio">
+        DELETE
+        FROM Envio
+        WHERE IdEnvio = #{IdEnvio}
+    </delete>
+
+</mapper>

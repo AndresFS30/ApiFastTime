@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<root>
+<mapper namespace="unidad">
+   
+    <select id="obtenerUnidad" resultType="pojo.Unidad">
+    SELECT u.IdUnidad, u.vin, u.Marca, u.Modelo, u.Año as 'anio', u.IdInterno,u.IdTipo,t.DescripcionTipo as 'tipoUnidad'
+    FROM Unidad u
+    INNER JOIN TipoUnidad t ON t.IdTipo = u.IdTipo; 
+    </select> 
+    <select id="obtenerUnidadVIN" resultType="pojo.Unidad">
+    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    FROM Unidad u
+    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
+    WHERE u.VIN = #{VIN};
+    </select>
     
-</root>
+    <select id="obtenerUnidadMarca" resultType="pojo.Unidad">
+    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    FROM Unidad u
+    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
+    WHERE u.Marca = #{Marca};
+    </select>
+    
+    <select id="obtenerUnidadIdInterno" resultType="pojo.Unidad">
+    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    FROM Unidad u
+    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
+    WHERE u.IdInterno = #{IdInterno};
+    </select>
+    
+     <insert id="registrarUnidad" parameterType="pojo.Unidad" >
+     INSERT INTO Unidad (VIN, Marca, Modelo, Anio, IdInterno, IdTipo)
+     VALUES (#{VIN}, #{Marca}, #{Modelo}, #{Anio}, #{IdInterno}, #{IdTipo});
+    </insert>
+    
+    <update id="editarUnidad" parameterType="pojo.Unidad">
+    UPDATE Unidad
+    SET   Marca = #{Marca}, Modelo = #{Modelo},Anio = #{Anio},IdInterno = #{IdInterno},IdTipo = #{IdTipo}
+    WHERE IdUnidad = #{IdUnidad};
+    </update>
+
+    <delete id="eliminarUnidadId" parameterType="pojo.Unidad">
+        DELETE
+        FROM Unidad
+        WHERE IdUnidad = #{IdUnidad}
+    </delete>
+    
+ 
+</mapper>
