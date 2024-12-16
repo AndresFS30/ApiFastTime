@@ -5,87 +5,129 @@
  */
 package pojo;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author afs30
  */
 public class Paquete {
-    private String descripcion;
-    private Integer peso;
-    private String dimensiones;
-    private Integer alto;
-    private Integer ancho;
-    private Integer profundidad;
-    private Integer idEnvio;
-
+    private Integer IdPaquete;
+    private String NumeroGuia;
+    private String DescripcionPaquete;
+    private Float Peso;
+    private String Dimensiones;
+    private Float Alto;
+    private Float Ancho;
+    private Float Profundidad;
+    private Integer IdEnvio;
+    private String Envio;
+    private String Status;
+   
     public Paquete() {
     }
 
-    public Paquete(String descripcion, Integer peso, String dimensiones, Integer alto, Integer ancho, Integer profundidad, Integer idEnvio) {
-        this.descripcion = descripcion;
-        this.peso = peso;
-        this.dimensiones = dimensiones;
-        this.alto = alto;
-        this.ancho = ancho;
-        this.profundidad = profundidad;
-        this.idEnvio = idEnvio;
+    public Paquete(Integer IdPaquete, String NumeroGuia, String DescripcionPaquete, Float Peso, String Dimensiones, Float Alto, Float Ancho, Float Profundidad, Integer IdEnvio, String Envio, String Status) {
+        this.IdPaquete = IdPaquete;
+        this.NumeroGuia = NumeroGuia;
+        this.DescripcionPaquete = DescripcionPaquete;
+        this.Peso = Peso;
+        this.Dimensiones = Dimensiones;
+        this.Alto = Alto;
+        this.Ancho = Ancho;
+        this.Profundidad = Profundidad;
+        this.IdEnvio = IdEnvio;
+        this.Envio = Envio;
+        this.Status = Status;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Integer getIdPaquete() {
+        return IdPaquete;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setIdPaquete(Integer IdPaquete) {
+        this.IdPaquete = IdPaquete;
     }
 
-    public Integer getPeso() {
-        return peso;
+    public String getNumeroGuia() {
+        return NumeroGuia;
     }
 
-    public void setPeso(Integer peso) {
-        this.peso = peso;
+    public void setNumeroGuia(String NumeroGuia) {
+        this.NumeroGuia = NumeroGuia;
+    }
+
+    public String getDescripcionPaquete() {
+        return DescripcionPaquete;
+    }
+
+    public void setDescripcionPaquete(String DescripcionPaquete) {
+        this.DescripcionPaquete = DescripcionPaquete;
+    }
+
+    public Float getPeso() {
+        return Peso;
+    }
+
+    public void setPeso(Float Peso) {
+        this.Peso = Peso;
     }
 
     public String getDimensiones() {
-        return dimensiones;
+        return Dimensiones;
     }
 
-    public void setDimensiones(String dimensiones) {
-        this.dimensiones = dimensiones;
+    public void setDimensiones(String Dimensiones) {
+        this.Dimensiones = Dimensiones;
     }
 
-    public Integer getAlto() {
-        return alto;
+    public Float getAlto() {
+        return Alto;
     }
 
-    public void setAlto(Integer alto) {
-        this.alto = alto;
+    public void setAlto(Float Alto) {
+        this.Alto = Alto;
     }
 
-    public Integer getAncho() {
-        return ancho;
+    public Float getAncho() {
+        return Ancho;
     }
 
-    public void setAncho(Integer ancho) {
-        this.ancho = ancho;
+    public void setAncho(Float Ancho) {
+        this.Ancho = Ancho;
     }
 
-    public Integer getProfundidad() {
-        return profundidad;
+    public Float getProfundidad() {
+        return Profundidad;
     }
 
-    public void setProfundidad(Integer profundidad) {
-        this.profundidad = profundidad;
+    public void setProfundidad(Float Profundidad) {
+        this.Profundidad = Profundidad;
     }
 
     public Integer getIdEnvio() {
-        return idEnvio;
+        return IdEnvio;
     }
 
-    public void setIdEnvio(Integer idEnvio) {
-        this.idEnvio = idEnvio;
+    public void setIdEnvio(Integer IdEnvio) {
+        this.IdEnvio = IdEnvio;
     }
-    
-    
+
+    public String getEnvio() {
+        return Envio;
+    }
+
+    public void setEnvio(String Envio) {
+        this.Envio = Envio;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+
+   
 }

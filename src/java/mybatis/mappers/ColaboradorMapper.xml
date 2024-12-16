@@ -6,8 +6,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="colaborador">
     
     <select id="obtenerColaborador" resultType="pojo.Colaborador">
-    SELECT  IdColaborador,Colaborador.Nombre,ApellidoPaterno,ApellidoMaterno,CURP,Correo,Password,IdRol,Fotografia
-    FROM Colaborador;   
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia
+    FROM  colaborador c
+    INNER JOIN Rol r ON r.IdRol = c.IdRol
+    LEFT JOIN conductor con ON con.IdColaborador = c.IdColaborador;
+    </select>
+
+    <select id="obtenerColaboradorNombre"  resultType="pojo.Colaborador">
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia
+    FROM  colaborador c
+    INNER JOIN Rol r ON r.IdRol = c.IdRol
+    LEFT JOIN conductor con ON con.IdColaborador = c.IdColaborador
+    WHERE c.Nombre = #{Nombre};
+    </select>
+
+    <select id="obtenerColaboradorNoPersonal"  resultType="pojo.Colaborador">
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia
+    FROM  colaborador c
+    INNER JOIN Rol r ON r.IdRol = c.IdRol
+    LEFT JOIN conductor con ON con.IdColaborador = c.IdColaborador
+    WHERE c.NoPersonal = #{NoPersonal};
+    </select>
+    
+    <select id="obtenerColaboradorRol"  resultType="pojo.Colaborador">
+    SELECT  c.IdColaborador,c.Nombre,c.ApellidoPaterno,c.ApellidoMaterno,c.CURP,c.Correo,c.Password,c.IdRol,r.DescripcionRol AS 'Rol',c.Fotografia,c.NoPersonal,con.NumeroLicencia
+    FROM  colaborador c
+    INNER JOIN Rol r ON r.IdRol = c.IdRol
+    LEFT JOIN conductor con ON con.IdColaborador = c.IdColaborador
+    WHERE r.DescripcionRol = #{Rol};
+    </select>
+    
+    <insert id="registrarColaborador" parameterType="pojo.Colaborador" >
+     INSERT INTO Colaborador (Nombre, ApellidoPaterno, ApellidoMaterno, CURP, Correo, Password, IdRol, NoPersonal)
+     VALUES (#{Nombre}, #{ApellidoPaterno}, #{ApellidoMaterno}, #{CURP}, #{Correo}, #{Password}, #{IdRol}, #{NoPersonal});
+
+    </insert>
+    
+    
+    <update id="editarColaborador" parameterType="pojo.Colaborador">
+    UPDATE colaborador
+    SET  Nombre = #{Nombre}, ApellidoPaterno = #{ApellidoPaterno}, ApellidoMaterno = #{ApellidoMaterno},CURP = #{CURP},Correo = #{Correo},Password = #{Password}
+    WHERE IdColaborador = #{IdColaborador};
+    </update>
+
+     <insert id="actualizarConductor" parameterType="pojo.Colaborador" >
+     INSERT INTO Conductor (IdColaborador,NumeroLicencia)
+     VALUES (#{IdColaborador}, #{NumeroLicencia});
+    </insert>
+    
+    
+    <delete id="eliminarColaboradorId" parameterType="pojo.Colaborador">
+        DELETE
+        FROM Colaborador
+        WHERE IdColaborador = #{IdColaborador}
+    </delete>
+    
+    <update id="guardarFoto" parameterType="map"> 
+    UPDATE colaborador
+    SET Fotografia = #{Fotografia}
+    WHERE IdColaborador = #{IdColaborador};
+    </update>
+     
+    <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
+    SELECT IdColaborador, c.Nombre, c.ApellidoPaterno, c.ApellidoMaterno, 
+           TO_BASE64(Fotografia) as fotoBase64
+    FROM colaborador c
+    WHERE c.IdColaborador = #{IdColaborador};
     </select>
 
     

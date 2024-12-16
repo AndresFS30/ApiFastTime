@@ -20,12 +20,15 @@ public class Colaborador {
        private Integer IdRol;
        private String Rol;
        private String fotoBase64;
-       private String noLicencia;
+       private String NoLicencia;
+       private String NoPersonal;
+       private Integer IdConductor;
+       private String NumeroLicencia;
 
     public Colaborador() {
     }
 
-    public Colaborador(Integer IdColaborador, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String CURP, String Correo, String Password, Integer IdRol, String Rol, String fotoBase64, String noLicencia) {
+    public Colaborador(Integer IdColaborador, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String CURP, String Correo, String Password, Integer IdRol, String Rol, String fotoBase64, String NoLicencia, String NoPersonal, Integer IdConductor, String NumeroLicencia) {
         this.IdColaborador = IdColaborador;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -36,7 +39,10 @@ public class Colaborador {
         this.IdRol = IdRol;
         this.Rol = Rol;
         this.fotoBase64 = fotoBase64;
-        this.noLicencia = noLicencia;
+        this.NoLicencia = NoLicencia;
+        this.NoPersonal = NoPersonal;
+        this.IdConductor = IdConductor;
+        this.NumeroLicencia = NumeroLicencia;
     }
 
     public Integer getIdColaborador() {
@@ -120,12 +126,36 @@ public class Colaborador {
     }
 
     public String getNoLicencia() {
-        return noLicencia;
+        return NoLicencia;
     }
 
-    public void setNoLicencia(String noLicencia) {
-        this.noLicencia = noLicencia;
+    public void setNoLicencia(String NoLicencia) {
+        this.NoLicencia = NoLicencia;
     }
 
-    
+    public String getNoPersonal() {
+        return NoPersonal;
+    }
+
+    public void setNoPersonal(String NoPersonal) {
+        this.NoPersonal = NoPersonal;
+    }
+
+    public Integer getIdConductor() {
+        return IdConductor;
+    }
+
+    public void setIdConductor(Integer IdConductor) {
+        this.IdConductor = IdConductor;
+    }
+
+    public String getNumeroLicencia() {
+        return NumeroLicencia;
+    }
+
+    public void setNumeroLicencia(String NumeroLicencia) {
+        this.NumeroLicencia = NumeroLicencia;
+    }
+
+   
 }

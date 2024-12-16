@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<root>
+<mapper namespace="cliente">
     
-</root>
+    <select id="obtenerCliente"  resultType="pojo.Cliente"> 
+        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        FROM Cliente cl
+        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion;
+    </select>
+
+    <select id="obtenerClienteNombre"  resultType="pojo.Cliente"> 
+        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        FROM Cliente cl
+        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
+        WHERE cl.Nombre = #{Nombre};
+    </select>
+    
+    <select id="obtenerClienteTelefono"  resultType="pojo.Cliente"> 
+        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        FROM Cliente cl
+        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
+        WHERE cl.Telefono = #{Telefono};
+    </select>
+
+    <select id="obtenerClienteCorreo"  resultType="pojo.Cliente"> 
+        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        FROM Cliente cl
+        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
+        WHERE cl.Correo = #{Correo};
+    </select>
+    
+    <insert id="registrarCliente" parameterType="pojo.Cliente" >
+        INSERT INTO Cliente (Nombre, ApellidoPaterno, ApellidoMaterno,Telefono,Correo,IdDireccion)
+        VALUES (#{Nombre}, #{ApellidoPaterno}, #{ApellidoMaterno},#{Telefono},#{Correo},#{IdDireccion});
+    </insert>
+    
+    
+    <insert id="registrarDireccion" parameterType="pojo.Cliente" >
+        INSERT INTO DireccionCliente(Calle,Numero,Colonia,CodigoPostal)
+        VALUES (#{Calle},#{Numero},#{Colonia},#{CodigoPostal});
+    </insert>
+
+    <update id="editarCliente" parameterType="pojo.Cliente"> 
+    UPDATE Cliente
+    SET Nombre = #{Nombre}, ApellidoPaterno = #{ApellidoPaterno},ApellidoMaterno =#{ApellidoMaterno},Correo =#{Correo},Telefono =#{Telefono}
+    WHERE IdCliente = #{IdCliente};
+    </update>
+    
+    <delete id="eliminarClienteId" parameterType="pojo.Cliente">
+        DELETE
+        FROM Cliente
+        WHERE IdCliente = #{IdCliente}
+    </delete>
+</mapper>

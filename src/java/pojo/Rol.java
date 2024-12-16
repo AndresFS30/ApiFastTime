@@ -11,14 +11,14 @@ package pojo;
  */
 public class Rol {
     private Integer idRol;
-    private String nombre;
+    private String DescripcionRol;
 
     public Rol() {
     }
 
-    public Rol(Integer idRol, String nombre) {
+    public Rol(Integer idRol, String DescripcionRol) {
         this.idRol = idRol;
-        this.nombre = nombre;
+        this.DescripcionRol = DescripcionRol;
     }
 
     public Integer getIdRol() {
@@ -29,13 +29,14 @@ public class Rol {
         this.idRol = idRol;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDescripcionRol() {
+        return DescripcionRol;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDescripcionRol(String DescripcionRol) {
+        this.DescripcionRol = DescripcionRol;
     }
+
     
     
 }

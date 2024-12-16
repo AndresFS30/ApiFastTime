@@ -10,123 +10,132 @@ package pojo;
  * @author afs30
  */
 public class Cliente {
-    private Integer idCliente;
-    private String  nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private String calle;
-    private Integer numero;
-    private String colonia;
-    private Integer codigoPostal;
-    private String telefono;
-    private String correoElectronico;
-    private String direccion; 
+    private Integer IdCliente;
+    private String  Nombre;
+    private String ApellidoPaterno;
+    private String ApellidoMaterno;
+    private String Calle;
+    private Integer Numero;
+    private String Colonia;
+    private Integer CodigoPostal;
+    private String Telefono;
+    private String Correo;
+    private String Direccion; 
+    private Integer IdDireccion;
 
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String calle, Integer numero, String colonia, Integer codigoPostal, String telefono, String correoElectronico, String direccion) {
-        this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.calle = calle;
-        this.numero = numero;
-        this.colonia = colonia;
-        this.codigoPostal = codigoPostal;
-        this.telefono = telefono;
-        this.correoElectronico = correoElectronico;
-        this.direccion = direccion;
+    public Cliente(Integer IdCliente, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String Calle, Integer Numero, String Colonia, Integer CodigoPostal, String Telefono, String Correo, String Direccion, Integer IdDireccion) {
+        this.IdCliente = IdCliente;
+        this.Nombre = Nombre;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.Calle = Calle;
+        this.Numero = Numero;
+        this.Colonia = Colonia;
+        this.CodigoPostal = CodigoPostal;
+        this.Telefono = Telefono;
+        this.Correo = Correo;
+        this.Direccion = Direccion;
+        this.IdDireccion = IdDireccion;
     }
 
     public Integer getIdCliente() {
-        return idCliente;
+        return IdCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setIdCliente(Integer IdCliente) {
+        this.IdCliente = IdCliente;
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+        return ApellidoPaterno;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setApellidoPaterno(String ApellidoPaterno) {
+        this.ApellidoPaterno = ApellidoPaterno;
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+        return ApellidoMaterno;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setApellidoMaterno(String ApellidoMaterno) {
+        this.ApellidoMaterno = ApellidoMaterno;
     }
 
     public String getCalle() {
-        return calle;
+        return Calle;
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
+    public void setCalle(String Calle) {
+        this.Calle = Calle;
     }
 
     public Integer getNumero() {
-        return numero;
+        return Numero;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumero(Integer Numero) {
+        this.Numero = Numero;
     }
 
     public String getColonia() {
-        return colonia;
+        return Colonia;
     }
 
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
+    public void setColonia(String Colonia) {
+        this.Colonia = Colonia;
     }
 
     public Integer getCodigoPostal() {
-        return codigoPostal;
+        return CodigoPostal;
     }
 
-    public void setCodigoPostal(Integer codigoPostal) {
-        this.codigoPostal = codigoPostal;
+    public void setCodigoPostal(Integer CodigoPostal) {
+        this.CodigoPostal = CodigoPostal;
     }
 
     public String getTelefono() {
-        return telefono;
+        return Telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
     }
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getCorreo() {
+        return Correo;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreo(String Correo) {
+        this.Correo = Correo;
     }
 
     public String getDireccion() {
-        return direccion;
+        return Direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setDireccion(String Direccion) {
+        this.Direccion = Direccion;
     }
-    
-    
-    
+
+    public Integer getIdDireccion() {
+        return IdDireccion;
+    }
+
+    public void setIdDireccion(Integer IdDireccion) {
+        this.IdDireccion = IdDireccion;
+    }
+
+   
 }
