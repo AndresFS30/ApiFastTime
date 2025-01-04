@@ -38,13 +38,13 @@ public class ImpCliente {
     return lista;
 }
     
-public static List<Cliente> obtenerClienteNombre(String Nombre) {
+public static List<Cliente> obtenerClienteNombre(String nombre) {
     List<Cliente> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Nombre", Nombre);
+            parametros.put("nombre", nombre);
             lista = conexionBD.selectList("cliente.obtenerClienteNombre", parametros);
  
         } catch (Exception e) {
@@ -56,13 +56,13 @@ public static List<Cliente> obtenerClienteNombre(String Nombre) {
     return lista;
 }
   
-public static List<Cliente> obtenerClienteTelefono(String Telefono) {
+public static List<Cliente> obtenerClienteTelefono(String telefono) {
     List<Cliente> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Telefono", Telefono);
+            parametros.put("telefono", telefono);
             lista = conexionBD.selectList("cliente.obtenerClienteTelefono", parametros);
  
         } catch (Exception e) {
@@ -74,13 +74,13 @@ public static List<Cliente> obtenerClienteTelefono(String Telefono) {
     return lista;
 }
 
-public static List<Cliente> obtenerClienteCorreo(String Correo) {
+public static List<Cliente> obtenerClienteCorreo(String correo) {
     List<Cliente> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Correo", Correo);
+            parametros.put("correo", correo);
             lista = conexionBD.selectList("cliente.obtenerClienteCorreo", parametros);
  
         } catch (Exception e) {
@@ -147,18 +147,18 @@ public static List<Cliente> obtenerClienteCorreo(String Correo) {
     }
     
     
-    public static Mensaje eliminarCliente(Integer IdCliente){
+    public static Mensaje eliminarCliente(Integer idCliente){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if(conexionBD != null){
         try{
         HashMap<String, Integer> parametros = new LinkedHashMap<>();
-        parametros.put("IdCliente", IdCliente);
+        parametros.put("idCliente", idCliente);
         int filasAfectadas = conexionBD.delete("cliente.eliminarClienteId" ,parametros);
          if(filasAfectadas > 0){
                 respuesta.setError(false);
                 respuesta.setMensaje("Cliente eliminado");
-                
+
             }else{
                 respuesta.setError(true);
                 respuesta.setMensaje("No se pudo eliminar el cliente");
@@ -167,11 +167,11 @@ public static List<Cliente> obtenerClienteCorreo(String Correo) {
           }catch(Exception e){
                 respuesta.setError(true);
                 respuesta.setMensaje(e.getMessage());
-        
+
         }finally{
         conexionBD.close();
         }
-        
+
     }else {
          respuesta.setError(true);
          respuesta.setMensaje("Por el momento no se puede consultar la informacion");

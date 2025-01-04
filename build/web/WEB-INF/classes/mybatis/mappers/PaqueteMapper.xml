@@ -6,20 +6,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     
     <select id="obtenerPaquete"  resultType="pojo.Paquete"> 
-    SELECT p.NumeroGuia ,p.DescripcionPaquete ,p.Peso ,p.Alto ,p.Ancho ,p.Profundidad 
-    FROM Paquete p
+    SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
+    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho
+    FROM Statusenvio se
+    INNER JOIN Envio e ON e.idEnvio = se.idEnvio
+    INNER JOIN Direccionorigen d ON d.idOrigen = e.idOrigen
+    INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
+    INNER JOIN Paquete p ON p.idPaquete = e.idPaquete
+    INNER JOIN Cliente c ON c.idCliente = e.idCliente;
     </select>
 
     <select id="obtenerPaqueteEnvio"  resultType="pojo.Paquete"> 
-    SELECT  p.IdPaquete,p.DescripcionPaquete,p.Peso,p.Alto,p.Profundidad,p.Ancho,e.IdEnvio AS 'Envio'
+    SELECT  p.idPaquete,p.descripcionPaquete,p.peso,p.alto,p.profundidad,p.ancho,e.idEnvio AS 'envio'
     FROM Paquete p
-    INNER JOIN Envio e ON e.IdEnvio = p.IdEnvio
-    WHERE e.IdEnvio = #{IdEnvio};
+    INNER JOIN Envio e ON e.idEnvio = p.idEnvio
+    WHERE e.idEnvio = #{idEnvio};
+    </select>
+
+    <select id="obtenerPaqueteNoGuia"  resultType="pojo.Paquete"> 
+   SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
+    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho
+    FROM Statusenvio se
+    INNER JOIN Envio e ON e.idEnvio = se.idEnvio
+    INNER JOIN Direccionorigen d ON d.idOrigen = e.idOrigen
+    INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
+    INNER JOIN Paquete p ON p.idPaquete = e.idPaquete
+    INNER JOIN Cliente c ON c.idCliente = e.idCliente
+    WHERE e.numeroGuia = #{numeroGuia};
+    
     </select>
     
+    
     <insert id="registrarPaquete" parameterType="pojo.Paquete" >
-        INSERT INTO Paquete ( DescripcionPaquete, Peso, Alto, Profundidad, Ancho, IdEnvio)
-        VALUES (#{DescripcionPaquete}, #{Peso}, #{Alto}, #{Profundidad}, #{Ancho}, #{IdEnvio});
+        INSERT INTO Paquete ( descripcionPaquete, peso, alto, profundidad, ancho, idEnvio)
+        VALUES (#{descripcionPaquete}, #{peso}, #{alto}, #{profundidad}, #{ancho}, #{idEnvio});
 
     </insert>
     
@@ -27,13 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <update id="editarPaquete" parameterType="pojo.Paquete"> 
     UPDATE Paquete
-    SET  DescripcionPaquete = #{DescripcionPaquete},Peso =#{Peso},Alto =#{Alto},Profundidad =#{Profundidad},Ancho =#{Ancho}
-    WHERE IdPaquete = #{IdPaquete}
+    SET  descripcionPaquete = #{descripcionPaquete},peso =#{peso},alto =#{alto},profundidad =#{profundidad},ancho =#{ancho}
+    WHERE idPaquete = #{idPaquete}
     </update>
     
     <delete id="eliminarPaqueteId" parameterType="pojo.Paquete">
         DELETE
         FROM Paquete
-        WHERE IdPaquete = #{IdPaquete}
+        WHERE idPaquete = #{idPaquete}
     </delete>
 </mapper>

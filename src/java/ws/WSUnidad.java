@@ -49,12 +49,12 @@ public class WSUnidad {
     }
     
     @GET
-    @Path("obtenerUnidadVIN/{VIN}")
+    @Path("obtenerUnidadVIN/{vin}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadVIN(@PathParam("VIN")String VIN){
+    public List<Unidad>obtenerUnidadVIN(@PathParam("vin")String vin){
        
-        if((VIN != null) && !(VIN.isEmpty())){
-           return ImpUnidad.obtenerUnidadVIN(VIN);
+        if((vin != null) && !(vin.isEmpty())){
+           return ImpUnidad.obtenerUnidadVIN(vin);
        } 
         throw new BadRequestException();
     
@@ -62,12 +62,12 @@ public class WSUnidad {
     }
     
     @GET
-    @Path("obtenerUnidadMarca/{Marca}")
+    @Path("obtenerUnidadMarca/{marca}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadMarca(@PathParam("Marca")String Marca){
+    public List<Unidad>obtenerUnidadMarca(@PathParam("marca")String marca){
        
-        if((Marca != null) && !(Marca.isEmpty())){
-           return ImpUnidad.obtenerUnidadMarca(Marca);
+        if((marca != null) && !(marca.isEmpty())){
+           return ImpUnidad.obtenerUnidadMarca(marca);
        } 
         throw new BadRequestException();
     
@@ -75,13 +75,13 @@ public class WSUnidad {
     }
     
     @GET
-    @Path("obtenerUnidadIdInterno/{IdInterno}")
+    @Path("obtenerUnidadIdInterno/{idInterno}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad>obtenerUnidadIdInterno(@PathParam("IdInterno")String IdInterno){
+    public List<Unidad>obtenerUnidadIdInterno(@PathParam("idInterno")String idInterno){
        
-        if((IdInterno != null) && !(IdInterno.isEmpty())){
+        if((idInterno != null) && !(idInterno.isEmpty())){
             
-        return ImpUnidad.obtenerUnidadIdInterno(IdInterno);
+        return ImpUnidad.obtenerUnidadIdInterno(idInterno);
        } 
         throw new BadRequestException();
     
@@ -125,9 +125,9 @@ public class WSUnidad {
     @Path("eliminarUnidad")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarUnidad(@QueryParam("IdUnidad") Integer IdUnidad) {
-               if((IdUnidad != null) && (IdUnidad > 0)){
-            return ImpUnidad.eliminarUnidad(IdUnidad);
+    public Mensaje eliminarUnidad(@QueryParam("idUnidad") Integer idUnidad) {
+               if((idUnidad != null) && (idUnidad > 0)){
+            return ImpUnidad.eliminarUnidad(idUnidad);
         }
         throw new BadRequestException();
     }

@@ -6,52 +6,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cliente">
     
     <select id="obtenerCliente"  resultType="pojo.Cliente"> 
-        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo, concat(d.Calle,' ',d.Numero,' ',d.Colonia,' ',d.CodigoPostal) AS 'direccion'
+        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo, concat(d.calle,' ',d.numero,' ',d.colonia,' ',d.codigoPostal) AS 'direccion'
         FROM Cliente cl
-        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
+        INNER JOIN DireccionCliente d ON d.idDireccion = cl.idDireccion
     </select>
 
     <select id="obtenerClienteNombre"  resultType="pojo.Cliente"> 
-        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo,d.calle AS 'Calle',d.numero AS 'Numero',d.colonia AS 'colonia',d.codigoPostal AS 'codigoPostal'
         FROM Cliente cl
-        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
-        WHERE cl.Nombre = #{Nombre}
+        INNER JOIN DireccionCliente d ON d.idDireccion = cl.idDireccion
+        WHERE cl.nombre = #{nombre}
     </select>
     
     <select id="obtenerClienteTelefono"  resultType="pojo.Cliente"> 
-        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo,d.calle AS 'calle',d.numero AS 'numero',d.colonia AS 'colonia',d.codigoPostal AS 'codigoPostal'
         FROM Cliente cl
-        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
-        WHERE cl.Telefono = #{Telefono}
+        INNER JOIN DireccionCliente d ON d.idDireccion = cl.idDireccion
+        WHERE cl.telefono = #{telefono}
     </select>
 
     <select id="obtenerClienteCorreo"  resultType="pojo.Cliente"> 
-        SELECT IdCliente,cl.IdDireccion,cl.Nombre,cl.ApellidoPaterno,cl.ApellidoMaterno,cl.Telefono,cl.Correo,d.Calle AS 'Calle',d.Numero AS 'Numero',d.Colonia AS 'Colonia',d.CodigoPostal AS 'CodigoPostal'
+        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo,d.calle AS 'calle',d.numero AS 'numero',d.colonia AS 'colonia',d.codigoPostal AS 'codigoPostal'
         FROM Cliente cl
-        INNER JOIN DireccionCliente d ON d.IdDireccion = cl.IdDireccion
-        WHERE cl.Correo = #{Correo}
+        INNER JOIN DireccionCliente d ON d.idDireccion = cl.idDireccion
+        WHERE cl.correo = #{correo}
     </select>
     
-    <insert id="registrarCliente" parameterType="pojo.Cliente" >
-        INSERT INTO Cliente (Nombre, ApellidoPaterno, ApellidoMaterno,Telefono,Correo,IdDireccion)
-        VALUES (#{Nombre}, #{ApellidoPaterno}, #{ApellidoMaterno},#{Telefono},#{Correo},#{IdDireccion});
+    <insert id="registrarCliente" parameterType="map">
+    CALL InsertarClienteConDireccion(
+        #{nombre},
+        #{apellidoPaterno},
+        #{apellidoMaterno},
+        #{telefono},
+        #{correo},
+        #{calle},
+        #{numero},
+        #{colonia},
+        #{codigoPostal}
+    )
     </insert>
     
     
     <insert id="registrarDireccion" parameterType="pojo.Cliente" >
-        INSERT INTO DireccionCliente(Calle,Numero,Colonia,CodigoPostal)
-        VALUES (#{Calle},#{Numero},#{Colonia},#{CodigoPostal});
+        INSERT INTO DireccionCliente(calle,numero,colonia,codigoPostal)
+        VALUES (#{calle},#{numero},#{colonia},#{codigoPostal});
     </insert>
 
-    <update id="editarCliente" parameterType="pojo.Cliente"> 
-    UPDATE Cliente
-    SET Nombre = #{Nombre}, ApellidoPaterno = #{ApellidoPaterno},ApellidoMaterno =#{ApellidoMaterno},Correo =#{Correo},Telefono =#{Telefono}
-    WHERE IdCliente = #{IdCliente};
+   <update id="editarCliente" parameterType="map">
+    CALL ActualizarClienteConDireccion(
+        #{idCliente},
+        #{nombre},
+        #{apellidoPaterno},
+        #{apellidoMaterno},
+        #{telefono},
+        #{correo},
+        #{calle},
+        #{numero},
+        #{colonia},
+        #{codigoPostal}
+    )
     </update>
     
     <delete id="eliminarClienteId" parameterType="pojo.Cliente">
         DELETE
         FROM Cliente
-        WHERE IdCliente = #{IdCliente}
+        WHERE idCliente = #{idCliente}
     </delete>
 </mapper>

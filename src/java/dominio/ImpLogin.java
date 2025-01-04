@@ -18,14 +18,14 @@ import pojo.Login;
  * @author afs30
  */
 public class ImpLogin {
-        public static Login validarSesionColaborador(String NoPersonal, String Password){
+        public static Login validarSesionColaborador(String noPersonal, String password){
         Login respuesta = new Login();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD != null){
         try{
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("NoPersonal",NoPersonal);
-            parametros.put("Password",Password);
+            parametros.put("noPersonal",noPersonal);
+            parametros.put("password",password);
             Colaborador colaborador = conexionBD.selectOne("sesion.loginColaborador",parametros);
             if(colaborador != null){
                 respuesta.setError(false);

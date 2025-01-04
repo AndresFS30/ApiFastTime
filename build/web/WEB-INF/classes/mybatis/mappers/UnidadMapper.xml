@@ -6,46 +6,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="unidad">
    
     <select id="obtenerUnidad" resultType="pojo.Unidad">
-    SELECT u.IdUnidad, u.vin, u.Marca, u.Modelo, u.Año as 'anio', u.IdInterno,u.IdTipo,t.DescripcionTipo as 'tipoUnidad'
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año as 'año', u.idInterno,u.idTipo,t.descripcionTipo as 'tipoUnidad'
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON t.IdTipo = u.IdTipo; 
+    INNER JOIN TipoUnidad t ON t.idTipo = u.idTipo; 
     </select> 
     <select id="obtenerUnidadVIN" resultType="pojo.Unidad">
-    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año, u.idInterno,u.idTipo
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
-    WHERE u.VIN = #{VIN};
+    INNER JOIN TipoUnidad t ON T.idTipo = u.idTipo
+    WHERE u.vin = #{vin};
     </select>
     
     <select id="obtenerUnidadMarca" resultType="pojo.Unidad">
-    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año, u.idInterno,u.idTipo
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
-    WHERE u.Marca = #{Marca};
+    INNER JOIN TipoUnidad t ON T.idTipo = u.idTipo
+    WHERE u.marca = #{marca};
     </select>
     
     <select id="obtenerUnidadIdInterno" resultType="pojo.Unidad">
-    SELECT u.IdUnidad, u.VIN, u.Marca, u.Modelo, u.Anio, u.IdInterno,u.IdTipo
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año, u.idInterno,u.idTipo
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON T.IdTipo = u.IdTipo
-    WHERE u.IdInterno = #{IdInterno};
+    INNER JOIN TipoUnidad t ON T.idTipo = u.idTipo
+    WHERE u.idInterno = #{idInterno};
     </select>
     
      <insert id="registrarUnidad" parameterType="pojo.Unidad" >
-     INSERT INTO Unidad (VIN, Marca, Modelo, Anio, IdInterno, IdTipo)
-     VALUES (#{VIN}, #{Marca}, #{Modelo}, #{Anio}, #{IdInterno}, #{IdTipo});
+     INSERT INTO Unidad (vin, marca, modelo, año, idInterno, idTipo)
+     VALUES (#{vin}, #{marca}, #{modelo}, #{año}, #{idInterno}, #{idTipo});
     </insert>
     
     <update id="editarUnidad" parameterType="pojo.Unidad">
     UPDATE Unidad
-    SET   Marca = #{Marca}, Modelo = #{Modelo},Anio = #{Anio},IdInterno = #{IdInterno},IdTipo = #{IdTipo}
-    WHERE IdUnidad = #{IdUnidad};
+    SET   marca = #{marca}, modelo = #{modelo},año = #{año},idInterno = #{idInterno},idTipo = #{idTipo}
+    WHERE idUnidad = #{idUnidad};
     </update>
 
     <delete id="eliminarUnidadId" parameterType="pojo.Unidad">
         DELETE
         FROM Unidad
-        WHERE IdUnidad = #{IdUnidad}
+        WHERE idUnidad = #{idUnidad}
     </delete>
     
  

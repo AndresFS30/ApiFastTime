@@ -11,16 +11,16 @@ package pojo;
  */
 public class StatusEnvio {
     private Integer idStatus;
-    private Integer IdEnvio;
-    private String Status;
+    private Integer idEnvio;
+    private String status;
 
     public StatusEnvio() {
     }
 
-    public StatusEnvio(Integer idStatus, Integer IdEnvio, String Status) {
+    public StatusEnvio(Integer idStatus, Integer idEnvio, String status) {
         this.idStatus = idStatus;
-        this.IdEnvio = IdEnvio;
-        this.Status = Status;
+        this.idEnvio = idEnvio;
+        this.status = status;
     }
 
     public Integer getIdStatus() {
@@ -32,19 +32,19 @@ public class StatusEnvio {
     }
 
     public Integer getIdEnvio() {
-        return IdEnvio;
+        return idEnvio;
     }
 
-    public void setIdEnvio(Integer IdEnvio) {
-        this.IdEnvio = IdEnvio;
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

@@ -45,21 +45,22 @@ public class WSEnvio {
         return ImpEnvio.obtenerEnvio();
     }
     
-    @Path("obtenerEnvioNoGuia/{NumeroGuia}")
+    
+    @Path("obtenerEstatus/{idEnvio}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio>obtenerEnvioNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
-        return ImpEnvio.obtenerEnvioNoGuia(NumeroGuia);
+    public List<Envio>obtenerEstatus(@PathParam("idEnvio")Integer idEnvio){
+        return ImpEnvio.obtenerEstatus(idEnvio);
     }
-    
-    
-    @Path("obtenerEstatus/{IdEnvio}")
+
+
+    @Path("obtenerEnvioNoLicencia/{numeroLicencia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio>obtenerEstatus(@PathParam("IdEnvio")Integer IdEnvio){
-        return ImpEnvio.obtenerEstatus(IdEnvio);
+    public List<Envio> obtenerEnvioNoLicencia(@PathParam("numeroLicencia") String numeroLicencia) {
+    return ImpEnvio.obtenerEnvioNoLicencia(numeroLicencia);
     }
-    
+
     
     @Path("registrarEnvio")
     @POST
@@ -97,8 +98,8 @@ public class WSEnvio {
     @Path("eliminarEnvio")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarEnvio(@QueryParam("IdEnvio") Integer IdEnvio) {
-        return ImpEnvio.eliminarEnvio(IdEnvio);
+    public Mensaje eliminarEnvio(@QueryParam("idEnvio") Integer idEnvio) {
+        return ImpEnvio.eliminarEnvio(idEnvio);
     }
     
     

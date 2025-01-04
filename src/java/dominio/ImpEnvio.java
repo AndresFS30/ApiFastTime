@@ -40,13 +40,13 @@ public class ImpEnvio {
     return lista;
 }
     
-public static List<Envio> obtenerEnvioNoGuia(String NumeroGuia) {
+public static List<Envio> obtenerEnvioNoGuia(String numeroGuia) {
     List<Envio> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("NumeroGuia", NumeroGuia);
+            parametros.put("numeroGuia", numeroGuia);
             lista = conexionBD.selectList("envio.obtenerEnvioNoGuia", parametros);
  
         } catch (Exception e) {
@@ -59,13 +59,13 @@ public static List<Envio> obtenerEnvioNoGuia(String NumeroGuia) {
 }   
 
 
-public static List<Envio> obtenerEstatus(Integer IdEnvio) {
+public static List<Envio> obtenerEstatus(Integer idEnvio) {
     List<Envio> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, Integer> parametros = new LinkedHashMap<>();
-                parametros.put("IdEnvio", IdEnvio);
+                parametros.put("idEnvio", idEnvio);
             lista = conexionBD.selectList("envio.obtenerEstatus", parametros);
  
         } catch (Exception e) {
@@ -77,7 +77,23 @@ public static List<Envio> obtenerEstatus(Integer IdEnvio) {
     return lista;
 }  
 
-
+public static List<Envio> obtenerEnvioNoLicencia(String numeroLicencia) {
+    List<Envio> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+            parametros.put("numeroLicencia", numeroLicencia);
+            lista = conexionBD.selectList("envio.obtenerEnvioNoLicencia", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}   
 
 public static Mensaje registrarEnvio(Envio envio){
      Mensaje msj = new Mensaje();
@@ -133,13 +149,13 @@ public static Mensaje registrarEnvio(Envio envio){
     return respuesta;
     }
     
-    public static Mensaje eliminarEnvio(Integer IdEnvio){
+    public static Mensaje eliminarEnvio(Integer idEnvio){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if(conexionBD != null){
         try{
         HashMap<String, Integer> parametros = new LinkedHashMap<>();
-        parametros.put("IdEnvio", IdEnvio);
+        parametros.put("idEnvio", idEnvio);
         int filasAfectadas = conexionBD.delete("envio.eliminarEnvioId" ,parametros);
          if(filasAfectadas > 0){
                 respuesta.setError(false);

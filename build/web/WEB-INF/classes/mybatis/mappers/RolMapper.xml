@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="Rol">
     <select id="obtenerRol" resultType="pojo.Rol">
-    SELECT IdRol,r.DescripcionRol
+    SELECT idRol,r.descripcionRol
     FROM Rol r
     </select>
 

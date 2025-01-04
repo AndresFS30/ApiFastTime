@@ -37,13 +37,13 @@ public class ImpPaquete {
     }
     return lista;
 }
-    public static List<Paquete> obtenerPaqueteEnvio(Integer IdEnvio) {
+    public static List<Paquete> obtenerPaqueteEnvio(Integer idEnvio) {
     List<Paquete> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, Integer> parametros = new LinkedHashMap<>();
-            parametros.put("IdEnvio", IdEnvio);
+            parametros.put("idEnvio", idEnvio);
             lista = conexionBD.selectList("paquete.obtenerPaqueteEnvio", parametros);
  
         } catch (Exception e) {
@@ -53,7 +53,26 @@ public class ImpPaquete {
         }
     }
     return lista;
-}
+    }
+
+
+    public static List<Paquete> obtenerPaqueteNoGuia(String numeroGuia) {
+        List<Paquete> lista = new ArrayList();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if (conexionBD != null) {
+            try {
+                HashMap<String, String> parametros = new LinkedHashMap<>();
+                parametros.put("numeroGuia", numeroGuia);
+                lista = conexionBD.selectList("paquete.obtenerPaqueteNoGuia", parametros);
+     
+            } catch (Exception e) {
+            e.printStackTrace();
+            } finally {
+                conexionBD.close();
+            }
+        }
+        return lista;
+    }
     
     public static Mensaje registrarPaquete(Paquete paquete){
      Mensaje msj = new Mensaje();
@@ -109,13 +128,13 @@ public class ImpPaquete {
     return respuesta;
     }
     
-    public static Mensaje eliminarPaquete(Integer IdPaquete){
+    public static Mensaje eliminarPaquete(Integer idPaquete){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if(conexionBD != null){
         try{
         HashMap<String, Integer> parametros = new LinkedHashMap<>();
-        parametros.put("IdPaquete", IdPaquete);
+        parametros.put("idPaquete", idPaquete);
         int filasAfectadas = conexionBD.delete("paquete.eliminarPaqueteId" ,parametros);
          if(filasAfectadas > 0){
                 respuesta.setError(false);

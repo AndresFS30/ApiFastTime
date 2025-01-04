@@ -35,12 +35,12 @@ public class WSLogin {
     @Path("colaborador")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Login iniciarSesionColaborador(@FormParam("NoPersonal")String NoPersonal,@FormParam("Password")String Password){
+    public Login iniciarSesionColaborador(@FormParam("noPersonal")String noPersonal,@FormParam("password")String password){
     
-          if((NoPersonal != null && !NoPersonal.isEmpty())&&
-                ( Password != null && !Password.isEmpty())&& NoPersonal.length()<=10){
+          if((noPersonal != null && !noPersonal.isEmpty())&&
+                ( password != null && !password.isEmpty())&& noPersonal.length()<=10){
         
-        return ImpLogin.validarSesionColaborador(NoPersonal, Password);
+        return ImpLogin.validarSesionColaborador(noPersonal, password);
         }
     
         throw new BadRequestException();

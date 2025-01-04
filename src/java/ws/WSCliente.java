@@ -46,33 +46,33 @@ public class WSCliente {
     }
     
     @GET
-    @Path("obtenerClienteNombre/{Nombre}")
+    @Path("obtenerClienteNombre/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cliente>obtenerClienteNombre(@PathParam("Nombre")String Nombre){
-         if( (Nombre != null) && !(Nombre.isEmpty())){
-            return ImpCliente.obtenerClienteNombre(Nombre);
+    public List<Cliente>obtenerClienteNombre(@PathParam("nombre")String nombre){
+         if( (nombre != null) && !(nombre.isEmpty())){
+            return ImpCliente.obtenerClienteNombre(nombre);
         }
         throw new BadRequestException();
     }
     
     
     @GET
-    @Path("obtenerClienteTelefono/{Telefono}")
+    @Path("obtenerClienteTelefono/{telefono}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cliente>obtenerClienteTelefono(@PathParam("Telefono")String Telefono){
-        if( (Telefono != null) && !(Telefono.isEmpty())){
-            return ImpCliente.obtenerClienteTelefono(Telefono);
+    public List<Cliente>obtenerClienteTelefono(@PathParam("telefono")String telefono){
+        if( (telefono != null) && !(telefono.isEmpty())){
+            return ImpCliente.obtenerClienteTelefono(telefono);
         }
         throw new BadRequestException();
     }
     
     
     @GET
-    @Path("obtenerClienteCorreo/{Correo}")
+    @Path("obtenerClienteCorreo/{correo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Cliente>obtenerClienteCorreo(@PathParam("Correo")String Correo){
-      if( (Correo != null) && !(Correo.isEmpty())){
-            return ImpCliente.obtenerClienteCorreo(Correo);
+    public List<Cliente>obtenerClienteCorreo(@PathParam("correo")String correo){
+      if( (correo != null) && !(correo.isEmpty())){
+            return ImpCliente.obtenerClienteCorreo(correo);
         }
         throw new BadRequestException();
     }
@@ -111,12 +111,12 @@ public class WSCliente {
         }
     }
     
-    @Path("eliminarCliente")
+    @Path("eliminarCliente/{idCliente}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarCliente(@QueryParam("IdCliente") Integer IdCliente) {
-         if((IdCliente != null) && (IdCliente > 0)){
-            return ImpCliente.eliminarCliente(IdCliente);
+    public Mensaje eliminarCliente(@PathParam("idCliente") Integer idCliente) {
+         if((idCliente != null) && (idCliente > 0)){
+            return ImpCliente.eliminarCliente(idCliente);
         }
         throw new BadRequestException();
     }

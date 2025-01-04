@@ -50,23 +50,23 @@ public class WSColaborador {
     
     
     @GET
-    @Path("obtenerColaboradorNombre/{Nombre}")
+    @Path("obtenerColaboradorNombre/{nombre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorNombre(@PathParam("Nombre")String Nombre){
-                if( (Nombre != null) && !(Nombre.isEmpty())){
-            return ImpColaborador.obtenerColaboradorNombre(Nombre);
+    public List<Colaborador>obtenerColaboradorNombre(@PathParam("nombre")String nombre){
+                if( (nombre != null) && !(nombre.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNombre(nombre);
         }
         throw new BadRequestException();
     }
     
     @GET
-    @Path("obtenerColaboradorNoPersonal/{NoPersonal}")
+    @Path("obtenerColaboradorNoPersonal/{noPersonal}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorNoPersonal(@PathParam("NoPersonal")String NoPersonal){
+    public List<Colaborador>obtenerColaboradorNoPersonal(@PathParam("noPersonal")String noPersonal){
        
         
-        if( (NoPersonal != null) && !(NoPersonal.isEmpty())){
-            return ImpColaborador.obtenerColaboradorNoPersonal(NoPersonal);
+        if( (noPersonal != null) && !(noPersonal.isEmpty())){
+            return ImpColaborador.obtenerColaboradorNoPersonal(noPersonal);
         }
         throw new BadRequestException();
     
@@ -74,12 +74,12 @@ public class WSColaborador {
     }
     
     @GET
-    @Path("obtenerColaboradorRol/{Rol}")
+    @Path("obtenerColaboradorRol/{rol}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador>obtenerColaboradorRol(@PathParam("Rol")String Rol){
+    public List<Colaborador>obtenerColaboradorRol(@PathParam("rol")String rol){
        
-        if((Rol != null) && !(Rol.isEmpty())){
-            return ImpColaborador.obtenerColaboradorRol(Rol);
+        if((rol != null) && !(rol.isEmpty())){
+            return ImpColaborador.obtenerColaboradorRol(rol);
         }
         throw new BadRequestException();
     
@@ -121,9 +121,9 @@ public class WSColaborador {
     @Path("eliminarColaborador/{idColaborador}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarColaborador(@PathParam("idColaborador") Integer IdColaborador) {
-        if((IdColaborador != null) && (IdColaborador > 0)){
-            return ImpColaborador.eliminarColaborador(IdColaborador);
+    public Mensaje eliminarColaborador(@PathParam("idColaborador") Integer idColaborador) {
+        if((idColaborador != null) && (idColaborador > 0)){
+            return ImpColaborador.eliminarColaborador(idColaborador);
         }
         throw new BadRequestException();
     }
@@ -146,24 +146,24 @@ public class WSColaborador {
         
     }
     
-    @Path("subirFoto/{IdColaborador}")
+    @Path("subirFoto/{idColaborador}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje subirFoto(@PathParam("IdColaborador")Integer IdColaborador,
-                                        byte[] Foto){
-        if(IdColaborador != null && IdColaborador>0 && Foto != null){
-         return ImpColaborador.registrarFoto(IdColaborador,Foto);
+    public Mensaje subirFoto(@PathParam("idColaborador")Integer idColaborador,
+                                        byte[] fotografia){
+        if(idColaborador != null && idColaborador>0 && fotografia != null){
+         return ImpColaborador.registrarFoto(idColaborador,fotografia);
         }
        throw new BadRequestException();
    }
     
-  @Path("obtenerFoto/{IdColaborador}")
+  @Path("obtenerFoto/{idColaborador}")
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-   public Colaborador obtenerFoto(@PathParam("IdColaborador")Integer IdColaborador){
-       if(IdColaborador != null && IdColaborador > 0){
+   public Colaborador obtenerFoto(@PathParam("idColaborador")Integer idColaborador){
+       if(idColaborador != null && idColaborador > 0){
            
-           return ImpColaborador.obtenerFoto(IdColaborador);
+           return ImpColaborador.obtenerFoto(idColaborador);
        }
    
        throw new BadRequestException();

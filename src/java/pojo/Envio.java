@@ -10,62 +10,188 @@ package pojo;
  * @author afs30
  */
 public class Envio {
-    private Integer IdEnvio;
-    private Integer IdCliente;
-    private Integer IdOrigen;
-    private Integer IdDestino;
-    private Integer IdPaquete;
-    private String Calle;
-    private Integer Numero;
-    private String Colonia;
-    private Integer CodigoPostal;
-    private String Ciudad;
-    private String Estado;
-    private String Destino;
-    private String Origen;
-    private String NoGuia;
-    private String Costo;
-    private String Status;
-    private String Cliente;
-     private Integer idStatus;
+    private Integer idEnvio;
+    private Integer idCliente;
+    private Integer idOrigen;
+    private Integer idDestino;
+    private Integer idPaquete;
+    private String calle;
+    private Integer numero;
+    private String colonia;
+    private Integer codigoPostal;
+    private String ciudad;
+    private String estado;
+    private String destino;
+    private String origen;
+    private String noGuia;
+    private String costo;
+    private String status;
+    private String cliente;
+    private Integer idStatus;
+    private  String numeroGuia;
+    private String repartidor;
+
 
     public Envio() {
     }
 
-    public Envio(Integer IdEnvio, Integer IdCliente, Integer IdOrigen, Integer IdDestino, Integer IdPaquete, String Calle, Integer Numero, String Colonia, Integer CodigoPostal, String Ciudad, String Estado, String Destino, String Origen, String NoGuia, String Costo, String Status, String Cliente, Integer idStatus, String conductor) {
-        this.IdEnvio = IdEnvio;
-        this.IdCliente = IdCliente;
-        this.IdOrigen = IdOrigen;
-        this.IdDestino = IdDestino;
-        this.IdPaquete = IdPaquete;
-        this.Calle = Calle;
-        this.Numero = Numero;
-        this.Colonia = Colonia;
-        this.CodigoPostal = CodigoPostal;
-        this.Ciudad = Ciudad;
-        this.Estado = Estado;
-        this.Destino = Destino;
-        this.Origen = Origen;
-        this.NoGuia = NoGuia;
-        this.Costo = Costo;
-        this.Status = Status;
-        this.Cliente = Cliente;
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, Integer idStatus, String numeroGuia, String repartidor) {
+        this.idEnvio = idEnvio;
+        this.idCliente = idCliente;
+        this.idOrigen = idOrigen;
+        this.idDestino = idDestino;
+        this.idPaquete = idPaquete;
+        this.calle = calle;
+        this.numero = numero;
+        this.colonia = colonia;
+        this.codigoPostal = codigoPostal;
+        this.ciudad = ciudad;
+        this.estado = estado;
+        this.destino = destino;
+        this.origen = origen;
+        this.noGuia = noGuia;
+        this.costo = costo;
+        this.status = status;
+        this.cliente = cliente;
         this.idStatus = idStatus;
-        this.conductor = conductor;
+        this.numeroGuia = numeroGuia;
+        this.repartidor = repartidor;
     }
 
-    public String getConductor() {
-        return conductor;
+    public Integer getIdEnvio() {
+        return idEnvio;
     }
 
-    public void setConductor(String conductor) {
-        this.conductor = conductor;
+    public void setIdEnvio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
     }
-     private String conductor;
-     
 
-    public Envio(Integer idStatus) {
-        this.idStatus = idStatus;
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Integer getIdOrigen() {
+        return idOrigen;
+    }
+
+    public void setIdOrigen(Integer idOrigen) {
+        this.idOrigen = idOrigen;
+    }
+
+    public Integer getIdDestino() {
+        return idDestino;
+    }
+
+    public void setIdDestino(Integer idDestino) {
+        this.idDestino = idDestino;
+    }
+
+    public Integer getIdPaquete() {
+        return idPaquete;
+    }
+
+    public void setIdPaquete(Integer idPaquete) {
+        this.idPaquete = idPaquete;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
+    public Integer getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(Integer codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getNoGuia() {
+        return noGuia;
+    }
+
+    public void setNoGuia(String noGuia) {
+        this.noGuia = noGuia;
+    }
+
+    public String getCosto() {
+        return costo;
+    }
+
+    public void setCosto(String costo) {
+        this.costo = costo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public Integer getIdStatus() {
@@ -75,145 +201,22 @@ public class Envio {
     public void setIdStatus(Integer idStatus) {
         this.idStatus = idStatus;
     }
-  
+
+    public String getNumeroGuia() {
+        return numeroGuia;
+    }
+
+    public void setNumeroGuia(String numeroGuia) {
+        this.numeroGuia = numeroGuia;
+    }
+
+    public String getRepartidor() {
+        return repartidor;
+    }
+
+    public void setRepartidor(String repartidor) {
+        this.repartidor = repartidor;
+    }
 
     
-
-    public Integer getIdEnvio() {
-        return IdEnvio;
-    }
-
-    public void setIdEnvio(Integer IdEnvio) {
-        this.IdEnvio = IdEnvio;
-    }
-
-    public Integer getIdCliente() {
-        return IdCliente;
-    }
-
-    public void setIdCliente(Integer IdCliente) {
-        this.IdCliente = IdCliente;
-    }
-
-    public Integer getIdOrigen() {
-        return IdOrigen;
-    }
-
-    public void setIdOrigen(Integer IdOrigen) {
-        this.IdOrigen = IdOrigen;
-    }
-
-    public Integer getIdDestino() {
-        return IdDestino;
-    }
-
-    public void setIdDestino(Integer IdDestino) {
-        this.IdDestino = IdDestino;
-    }
-
-    public Integer getIdPaquete() {
-        return IdPaquete;
-    }
-
-    public void setIdPaquete(Integer IdPaquete) {
-        this.IdPaquete = IdPaquete;
-    }
-
-    public String getCalle() {
-        return Calle;
-    }
-
-    public void setCalle(String Calle) {
-        this.Calle = Calle;
-    }
-
-    public Integer getNumero() {
-        return Numero;
-    }
-
-    public void setNumero(Integer Numero) {
-        this.Numero = Numero;
-    }
-
-    public String getColonia() {
-        return Colonia;
-    }
-
-    public void setColonia(String Colonia) {
-        this.Colonia = Colonia;
-    }
-
-    public Integer getCodigoPostal() {
-        return CodigoPostal;
-    }
-
-    public void setCodigoPostal(Integer CodigoPostal) {
-        this.CodigoPostal = CodigoPostal;
-    }
-
-    public String getCiudad() {
-        return Ciudad;
-    }
-
-    public void setCiudad(String Ciudad) {
-        this.Ciudad = Ciudad;
-    }
-
-    public String getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
-    }
-
-    public String getDestino() {
-        return Destino;
-    }
-
-    public void setDestino(String Destino) {
-        this.Destino = Destino;
-    }
-
-    public String getOrigen() {
-        return Origen;
-    }
-
-    public void setOrigen(String Origen) {
-        this.Origen = Origen;
-    }
-
-    public String getNoGuia() {
-        return NoGuia;
-    }
-
-    public void setNoGuia(String NoGuia) {
-        this.NoGuia = NoGuia;
-    }
-
-    public String getCosto() {
-        return Costo;
-    }
-
-    public void setCosto(String Costo) {
-        this.Costo = Costo;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String Status) {
-        this.Status = Status;
-    }
-
-    public String getCliente() {
-        return Cliente;
-    }
-
-    public void setCliente(String Cliente) {
-        this.Cliente = Cliente;
-    }
-    
-
 }

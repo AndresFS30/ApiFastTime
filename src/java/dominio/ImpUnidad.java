@@ -39,13 +39,13 @@ public class ImpUnidad {
     return lista;
 }
     
-public static List<Unidad> obtenerUnidadVIN(String VIN) {
+public static List<Unidad> obtenerUnidadVIN(String vin) {
     List<Unidad> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("VIN", VIN);
+            parametros.put("vin", vin);
             lista = conexionBD.selectList("unidad.obtenerUnidadVIN", parametros);
  
         } catch (Exception e) {
@@ -57,13 +57,13 @@ public static List<Unidad> obtenerUnidadVIN(String VIN) {
     return lista;
 }
 
-public static List<Unidad> obtenerUnidadMarca(String Marca) {
+public static List<Unidad> obtenerUnidadMarca(String marca) {
     List<Unidad> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Marca", Marca);
+            parametros.put("marca", marca);
             lista = conexionBD.selectList("unidad.obtenerUnidadMarca", parametros);
  
         } catch (Exception e) {
@@ -76,13 +76,13 @@ public static List<Unidad> obtenerUnidadMarca(String Marca) {
 }
 
 
-public static List<Unidad> obtenerUnidadIdInterno(String IdInterno) {
+public static List<Unidad> obtenerUnidadIdInterno(String idInterno) {
     List<Unidad> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("IdInterno", IdInterno);
+            parametros.put("idInterno", idInterno);
             lista = conexionBD.selectList("unidad.obtenerUnidadIdInterno", parametros);
  
         } catch (Exception e) {
@@ -151,13 +151,13 @@ public static List<Unidad> obtenerUnidadIdInterno(String IdInterno) {
     return respuesta;
     }
     
-    public static Mensaje eliminarUnidad(Integer IdUnidad){
+    public static Mensaje eliminarUnidad(Integer idUnidad){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if(conexionBD != null){
         try{
         HashMap<String, Integer> parametros = new LinkedHashMap<>();
-        parametros.put("IdUnidad", IdUnidad);
+        parametros.put("idUnidad", idUnidad);
         int filasAfectadas = conexionBD.delete("unidad.eliminarUnidadId" ,parametros);
          if(filasAfectadas > 0){
                 respuesta.setError(false);

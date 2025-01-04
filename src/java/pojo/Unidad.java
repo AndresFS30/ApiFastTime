@@ -12,69 +12,57 @@ package pojo;
 public class Unidad {
 
     
-    private Integer IdUnidad;
-    private String Marca;
-    private String Modelo;
-    private String anio;
+    private Integer idUnidad;
+    private String marca;
+    private String modelo;
+    private String año;
     private String vin;
-    private Integer IdTipo;
-    private String IdInterno;
-
-   
-
-    public String getTipoUnidad() {
-        return tipoUnidad;
-    }
-
-    public void setTipoUnidad(String tipoUnidad) {
-        this.tipoUnidad = tipoUnidad;
-    }
-    private String tipoUnidad;
+    private Integer idTipo;
+    private String idInterno;
 
     public Unidad() {
     }
 
-    public Unidad(Integer IdUnidad, String Marca, String Modelo, String anio, String vin, Integer IdTipo, String IdInterno, String tipoUnidad) {
-        this.IdUnidad = IdUnidad;
-        this.Marca = Marca;
-        this.Modelo = Modelo;
-        this.anio = anio;
+    public Unidad(Integer idUnidad, String marca, String modelo, String año, String vin, Integer idTipo, String idInterno) {
+        this.idUnidad = idUnidad;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.año = año;
         this.vin = vin;
-        this.IdTipo = IdTipo;
-        this.IdInterno = IdInterno;
-        this.tipoUnidad = tipoUnidad;
+        this.idTipo = idTipo;
+        this.idInterno = idInterno;
     }
 
     public Integer getIdUnidad() {
-        return IdUnidad;
+        return idUnidad;
     }
 
-    public void setIdUnidad(Integer IdUnidad) {
-        this.IdUnidad = IdUnidad;
+    public void setIdUnidad(Integer idUnidad) {
+        this.idUnidad = idUnidad;
     }
 
     public String getMarca() {
-        return Marca;
+        return marca;
     }
 
-    public void setMarca(String Marca) {
-        this.Marca = Marca;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getModelo() {
-        return Modelo;
+        return modelo;
     }
 
-    public void setModelo(String Modelo) {
-        this.Modelo = Modelo;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public String getanio() {
-        return anio;
+    public String getAño() {
+        return año;
     }
 
-    public void setanio(String anio) {
-        this.anio = anio;
+    public void setAño(String año) {
+        this.año = año;
     }
 
     public String getVin() {
@@ -86,23 +74,20 @@ public class Unidad {
     }
 
     public Integer getIdTipo() {
-        return IdTipo;
+        return idTipo;
     }
 
-    public void setIdTipo(Integer IdTipo) {
-        this.IdTipo = IdTipo;
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
     }
 
     public String getIdInterno() {
-        return IdInterno;
+        return idInterno;
     }
 
-    public void setIdInterno(String IdInterno) {
-        this.IdInterno = IdInterno;
+    public void setIdInterno(String idInterno) {
+        this.idInterno = idInterno;
     }
 
     
-
-   
-   
 }

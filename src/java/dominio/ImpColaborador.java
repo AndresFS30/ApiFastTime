@@ -38,13 +38,13 @@ public static List<Colaborador> obtenerColaborador() {
     return lista;
 }
 
-public static List<Colaborador> obtenerColaboradorNombre(String Nombre) {
+public static List<Colaborador> obtenerColaboradorNombre(String nombre) {
     List<Colaborador> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Nombre", Nombre);
+            parametros.put("nombre", nombre);
             lista = conexionBD.selectList("colaborador.obtenerColaboradorNombre", parametros);
  
         } catch (Exception e) {
@@ -56,13 +56,13 @@ public static List<Colaborador> obtenerColaboradorNombre(String Nombre) {
     return lista;
 }
 
-public static List<Colaborador> obtenerColaboradorNoPersonal(String NoPersonal) {
+public static List<Colaborador> obtenerColaboradorNoPersonal(String noPersonal) {
     List<Colaborador> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("NoPersonal", NoPersonal);
+            parametros.put("noPersonal", noPersonal);
             lista = conexionBD.selectList("colaborador.obtenerColaboradorNoPersonal", parametros);
  
         } catch (Exception e) {
@@ -74,13 +74,13 @@ public static List<Colaborador> obtenerColaboradorNoPersonal(String NoPersonal) 
     return lista;
 }
 
-public static List<Colaborador> obtenerColaboradorRol(String Rol) {
+public static List<Colaborador> obtenerColaboradorRol(String rol) {
     List<Colaborador> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
         try {
             HashMap<String, String> parametros = new LinkedHashMap<>();
-            parametros.put("Rol", Rol);
+            parametros.put("rol", rol);
             lista = conexionBD.selectList("colaborador.obtenerColaboradorRol", parametros);
  
         } catch (Exception e) {
@@ -153,13 +153,13 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     return respuesta;
     }
     
-    public static Mensaje eliminarColaborador(Integer IdColaborador){
+    public static Mensaje eliminarColaborador(Integer idColaborador){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if(conexionBD != null){
         try{
         HashMap<String, Integer> parametros = new LinkedHashMap<>();
-        parametros.put("IdColaborador", IdColaborador);
+        parametros.put("idColaborador", idColaborador);
         int filasAfectadas = conexionBD.delete("colaborador.eliminarColaboradorId" ,parametros);
          if(filasAfectadas > 0){
                 respuesta.setError(false);
@@ -213,11 +213,11 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
     return msj;
     }
     
-    public static  Mensaje registrarFoto(Integer IdColaborador, byte[] Foto){
+    public static  Mensaje registrarFoto(Integer idColaborador, byte[] fotografia){
     Mensaje msj = new Mensaje();
      LinkedHashMap<String, Object> parametros = new LinkedHashMap<>();
-        parametros.put("IdColaborador", IdColaborador);
-        parametros.put("Foto", Foto);
+        parametros.put("idColaborador", idColaborador);
+        parametros.put("fotografia", fotografia);
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD != null){
         try{
@@ -246,12 +246,12 @@ public static List<Colaborador> obtenerColaboradorRol(String Rol) {
         return msj;   
     }
     
-    public static Colaborador obtenerFoto(Integer IdColaborador){
+    public static Colaborador obtenerFoto(Integer idColaborador){
      Colaborador colaborador = null;
      SqlSession conexionBD = MyBatisUtil.obtenerConexion();
      if(conexionBD != null){
          try{
-           colaborador = conexionBD.selectOne("colaborador.obtenerFoto",IdColaborador);
+           colaborador = conexionBD.selectOne("colaborador.obtenerFoto",idColaborador);
          }catch(Exception e){
              e.printStackTrace();
          }
