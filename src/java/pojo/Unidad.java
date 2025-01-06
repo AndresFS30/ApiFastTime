@@ -19,11 +19,12 @@ public class Unidad {
     private String vin;
     private Integer idTipo;
     private String idInterno;
+    private String descripcionTipo;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String marca, String modelo, String año, String vin, Integer idTipo, String idInterno) {
+    public Unidad(Integer idUnidad, String marca, String modelo, String año, String vin, Integer idTipo, String idInterno,String descripcionTipo) {
         this.idUnidad = idUnidad;
         this.marca = marca;
         this.modelo = modelo;
@@ -31,6 +32,7 @@ public class Unidad {
         this.vin = vin;
         this.idTipo = idTipo;
         this.idInterno = idInterno;
+        this.descripcionTipo=descripcionTipo;
     }
 
     public Integer getIdUnidad() {
@@ -87,6 +89,14 @@ public class Unidad {
 
     public void setIdInterno(String idInterno) {
         this.idInterno = idInterno;
+    }
+
+    public String getDescripcionTipo() {
+        return descripcionTipo;
+    }
+
+    public void setDescripcionTipo(String descripcionTipo) {
+        this.descripcionTipo = descripcionTipo;
     }
 
     

@@ -6,19 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="envio">
 
     <select id="obtenerEnvio" resultType="pojo.Envio">
-    SELECT  e.costo,e.numeroGuia AS 'noGuia',
-		concat(c3.nombre,' ' ,c3.apellidoPaterno ,' ', c3.apellidoMaterno ) as conductor,
-		concat(c.nombre ,' ',c.apellidoPaterno ,' ',c.apellidoMaterno ) as cliente,
-        CONCAT(do.calle, ' ', do.numero, ' ', do.colonia, ' ', do.codigoPostal, ' ', do.ciudad, ' ', do.estado) AS origen,
-        CONCAT(dd.calle, ' ', dd.numero, ' ', dd.colonia, ' ', dd.codigoPostal, ' ', dd.ciudad, ' ', dd.estado) AS destino
-    FROM Envio e
-    INNER JOIN Cliente c ON c.idCliente = e.idCliente
-    INNER JOIN DireccionCliente dc ON dc.idDireccion = c.idDireccion
-    INNER JOIN DireccionOrigen do ON do.idOrigen = e.idOrigen
-    INNER JOIN DireccionDestino dd ON dd.idDestino = e.idDestino
-   	inner join asociacionenvio a on a.idEnvio=e.idEnvio
-  	inner join conductor c2 on c2.idConductor =a.idConductor 
-  	inner join colaborador c3 on c3.idColaborador =c2.idColaborador;
+    CALL ObtenerEnvios();
    </select>
 
    <select id="obtenerEnvioNoGuia" resultType="pojo.Envio">

@@ -88,10 +88,10 @@ public class WSPaquete {
         }
     }
     
-    @Path("eliminarPaquete")
+    @Path("eliminarPaquete/{idPaquete}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarPaquete(@QueryParam("idPaquete") Integer idPaquete) {
+    public Mensaje eliminarPaquete(@PathParam("idPaquete") Integer idPaquete) {
       if((idPaquete != null) && (idPaquete > 0)){
             return ImpPaquete.eliminarPaquete(idPaquete);
         }

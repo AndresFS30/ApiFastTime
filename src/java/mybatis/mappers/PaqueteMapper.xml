@@ -7,17 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="obtenerPaquete"  resultType="pojo.Paquete"> 
     SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
-    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho
+    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho,p.idPaquete
     FROM Statusenvio se
     INNER JOIN Envio e ON e.idEnvio = se.idEnvio
     INNER JOIN Direccionorigen d ON d.idOrigen = e.idOrigen
     INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
-    INNER JOIN Paquete p ON p.idPaquete = e.idPaquete
-    INNER JOIN Cliente c ON c.idCliente = e.idCliente;
+    INNER JOIN Paquete p ON p.numeroGuia = e.numeroGuia
+    INNER JOIN Cliente c ON c.idCliente = e.idCliente
+    WHERE se.modificacion = (
+        SELECT MAX(se2.modificacion)
+        FROM Statusenvio se2
+        WHERE se2.idEnvio = se.idEnvio
+    );
+
     </select>
 
     <select id="obtenerPaqueteEnvio"  resultType="pojo.Paquete"> 
-    SELECT  p.idPaquete,p.descripcionPaquete,p.peso,p.alto,p.profundidad,p.ancho,e.idEnvio AS 'envio'
+    SELECT  p.idPaquete,p.descripcionPaquete,p.peso,p.alto,p.profundidad,p.ancho,e.idEnvio AS 'envio',p.idPaquete
     FROM Paquete p
     INNER JOIN Envio e ON e.idEnvio = p.idEnvio
     WHERE e.idEnvio = #{idEnvio};
@@ -25,21 +31,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="obtenerPaqueteNoGuia"  resultType="pojo.Paquete"> 
    SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
-    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho
+    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho,p.idPaquete,se.modificacion
     FROM Statusenvio se
     INNER JOIN Envio e ON e.idEnvio = se.idEnvio
     INNER JOIN Direccionorigen d ON d.idOrigen = e.idOrigen
     INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
-    INNER JOIN Paquete p ON p.idPaquete = e.idPaquete
+    INNER JOIN Paquete p ON p.numeroGuia =e.numeroGuia 
     INNER JOIN Cliente c ON c.idCliente = e.idCliente
-    WHERE e.numeroGuia = #{numeroGuia};
+    WHERE e.numeroGuia = 'PAQ123456789' and  se.modificacion = (
+    SELECT MAX(se2.modificacion)
+    FROM Statusenvio se2
+    WHERE se2.idEnvio = se.idEnvio
+);
     
     </select>
     
     
     <insert id="registrarPaquete" parameterType="pojo.Paquete" >
-        INSERT INTO Paquete ( descripcionPaquete, peso, alto, profundidad, ancho, idEnvio)
-        VALUES (#{descripcionPaquete}, #{peso}, #{alto}, #{profundidad}, #{ancho}, #{idEnvio});
+        INSERT INTO Paquete ( descripcionPaquete, peso, alto, profundidad, ancho,numeroGuia)
+        VALUES (#{descripcionPaquete}, #{peso}, #{alto}, #{profundidad}, #{ancho}, #{numeroGuia});
 
     </insert>
     

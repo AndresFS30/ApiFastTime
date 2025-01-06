@@ -259,6 +259,21 @@ public static List<Colaborador> obtenerColaboradorRol(String rol) {
      return colaborador;
     }
     
-     
+     public static List<Colaborador> obtenerConductorLibre() {
+    List<Colaborador> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+          lista = conexionBD.selectList("colaborador.obtenerConductorLibre", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}
 
 }

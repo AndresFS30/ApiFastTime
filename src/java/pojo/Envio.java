@@ -29,13 +29,13 @@ public class Envio {
     private String cliente;
     private Integer idStatus;
     private  String numeroGuia;
-    private String repartidor;
+    private String conductor;
 
 
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, Integer idStatus, String numeroGuia, String repartidor) {
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, Integer idStatus, String numeroGuia, String conductor) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.idOrigen = idOrigen;
@@ -55,8 +55,10 @@ public class Envio {
         this.cliente = cliente;
         this.idStatus = idStatus;
         this.numeroGuia = numeroGuia;
-        this.repartidor = repartidor;
+        this.conductor = conductor;
     }
+
+    
 
     public Integer getIdEnvio() {
         return idEnvio;
@@ -210,13 +212,15 @@ public class Envio {
         this.numeroGuia = numeroGuia;
     }
 
-    public String getRepartidor() {
-        return repartidor;
+    public String getConductor() {
+        return conductor;
     }
 
-    public void setRepartidor(String repartidor) {
-        this.repartidor = repartidor;
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
     }
+
+    
 
     
 }

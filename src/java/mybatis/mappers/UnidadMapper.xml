@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="unidad">
    
     <select id="obtenerUnidad" resultType="pojo.Unidad">
-    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año as 'año', u.idInterno,u.idTipo,t.descripcionTipo as 'tipoUnidad'
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año as 'año', u.idInterno,u.idTipo,t.descripcionTipo 
     FROM Unidad u
     INNER JOIN TipoUnidad t ON t.idTipo = u.idTipo; 
     </select> 
@@ -31,14 +31,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE u.idInterno = #{idInterno};
     </select>
     
-     <insert id="registrarUnidad" parameterType="pojo.Unidad" >
-     INSERT INTO Unidad (vin, marca, modelo, año, idInterno, idTipo)
-     VALUES (#{vin}, #{marca}, #{modelo}, #{año}, #{idInterno}, #{idTipo});
+     <insert id="registrarUnidad" parameterType="pojo.Unidad">
+    CALL InsertarUnidad(
+        #{vin},
+        #{marca},
+        #{modelo},
+        #{año},
+        #{idTipo}
+    )
     </insert>
     
     <update id="editarUnidad" parameterType="pojo.Unidad">
     UPDATE Unidad
-    SET   marca = #{marca}, modelo = #{modelo},año = #{año},idInterno = #{idInterno},idTipo = #{idTipo}
+    SET   marca = #{marca}, modelo = #{modelo},año = #{año},idTipo = #{idTipo}
     WHERE idUnidad = #{idUnidad};
     </update>
 
@@ -47,6 +52,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM Unidad
         WHERE idUnidad = #{idUnidad}
     </delete>
+    <select id="obtenerTipo" resultType="pojo.Unidad">
+    SELECT idTipo,t.descripcionTipo
+    FROM tipoUnidad t
+    </select>
     
+    <insert id="bajaUnidad" parameterType="pojo.BajaUnidad">
+    INSERT INTO bajasunidad (idUnidad,Motivo)
+        VALUES (#{idUnidad},#{motivoBaja})
+    </insert>
+    <select id="obtenerUnidadLibre" resultType="pojo.Unidad"> 
+    SELECT 
+        u.idUnidad, 
+        u.vin, 
+        u.marca, 
+        u.modelo, 
+        u.año,
+        u.idInterno, 
+        u.idTipo, 
+        t.descripcionTipo AS 'tipoUnidad'
+    FROM 
+        Unidad u
+    INNER JOIN 
+        TipoUnidad t ON t.idTipo = u.idTipo
+    LEFT JOIN 
+        bajasUnidad b ON u.idUnidad = b.idUnidad
+    left join 
+        asociacionvehiculo a on u.idUnidad = a.idUnidad 
+    WHERE 
+        b.idUnidad IS null and a.idUnidad is null
+    </select>
  
 </mapper>

@@ -92,6 +92,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM colaborador c
     WHERE c.idColaborador = #{idColaborador};
     </select>
-
+    <select id="obtenerConductorLibre"  resultType="pojo.Colaborador">
+   SELECT
+    c.idColaborador,
+    c.nombre,
+    c.apellidoPaterno,
+    c.apellidoMaterno,
+    cd.numeroLicencia, 
+    cd.idConductor
+    FROM
+        colaborador c
+    left JOIN 
+    conductor cd ON c.idColaborador = cd.idColaborador 
+     left join 
+     asociacionvehiculo a on cd.idConductor = a.idConductor 
+     WHERE 
+    a.idConductor is null and cd.numeroLicencia is not null
+    </select>
     
 </mapper>

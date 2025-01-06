@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import pojo.BajaUnidad;
 import pojo.Colaborador;
 import pojo.Mensaje;
 import pojo.Unidad;
@@ -182,4 +183,67 @@ public static List<Unidad> obtenerUnidadIdInterno(String idInterno) {
     }
     return respuesta ;
     }
+    
+    public static List<Unidad> obtenerTipo() {
+    List<Unidad> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+          lista = conexionBD.selectList("unidad.obtenerTipo", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}
+    public static Mensaje bajaUnidad(BajaUnidad bajaUnidad){
+    Mensaje msj = new Mensaje();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+            try {
+                int resultado = conexionBD.insert("unidad.bajaUnidad", bajaUnidad);
+                conexionBD.commit();
+
+                if (resultado > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Unidad dada de baja con éxito");
+                } else {
+                    msj.setError(true);
+                    msj.setMensaje("No se pudo dar de baja la unidad, intentarlo más tarde.");
+                }
+            } catch (Exception e) {
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
+            } finally {
+                conexionBD.close();
+            }
+        } else {
+            msj.setError(true);
+            msj.setMensaje("No se pudo establecer conexión a la base de datos");
+        }
+
+        return msj;
+    }
+    public static List<Unidad> obtenerUnidadLibre() {
+    List<Unidad> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+          lista = conexionBD.selectList("unidad.obtenerUnidadLibre", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}
+    
+
 }

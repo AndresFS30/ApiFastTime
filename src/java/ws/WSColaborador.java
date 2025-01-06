@@ -168,5 +168,12 @@ public class WSColaborador {
    
        throw new BadRequestException();
    }
+   @Path("obtenerConductorLibre")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Colaborador> obtenerConductorLibre(){
     
+        return ImpColaborador.obtenerConductorLibre();
+        
+    }
 }

@@ -22,6 +22,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+import pojo.BajaUnidad;
 import pojo.Colaborador;
 import pojo.Mensaje;
 import pojo.Unidad;
@@ -130,5 +131,38 @@ public class WSUnidad {
             return ImpUnidad.eliminarUnidad(idUnidad);
         }
         throw new BadRequestException();
+    }
+    @Path("obtenerTipo")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerTipo(){
+        return ImpUnidad.obtenerTipo();
+    }
+    @Path("bajaUnidad")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje bajaUnidad(String jsonBaja) {
+        if (jsonBaja.isEmpty()){
+            throw new BadRequestException();
+        }else{
+            try{
+            Gson gson = new Gson();
+            BajaUnidad bajaUnidad = gson.fromJson(jsonBaja, BajaUnidad.class);
+            return ImpUnidad.bajaUnidad(bajaUnidad);
+            }catch( Exception e){
+                e.printStackTrace();
+                throw new BadRequestException();
+            }
+        }
+    }
+    
+    @Path("obtenerUnidadLibre")
+    @GET 
+   @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerUnidadLibre(){
+    
+    return ImpUnidad.obtenerUnidadLibre();
+        
     }
 }
