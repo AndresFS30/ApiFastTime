@@ -45,7 +45,20 @@ public class WSEnvio {
         return ImpEnvio.obtenerEnvio();
     }
     
+    @Path("obtenerNumerosGuias")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio>obtenerNumerosGuias(){
+        return ImpEnvio.obtenerNumerosGuias();
+    }
     
+    
+    @Path("obtenerEnvioNoGuia/{NumeroGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio>obtenerEnvioNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
+        return ImpEnvio.obtenerEnvioNoGuia(NumeroGuia);
+    }
     @Path("obtenerEstatus/{idEnvio}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

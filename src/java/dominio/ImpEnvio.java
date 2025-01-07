@@ -23,7 +23,7 @@ import pojo.StatusEnvio;
 public class ImpEnvio {
     
     
-    public static List<Envio> obtenerEnvio() {
+public static List<Envio> obtenerEnvio() {
     List<Envio> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
     if (conexionBD != null) {
@@ -39,7 +39,25 @@ public class ImpEnvio {
     }
     return lista;
 }
-    
+
+
+public static List<Envio> obtenerNumerosGuias() {
+    List<Envio> lista = new ArrayList();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if (conexionBD != null) {
+        try {
+            HashMap<String, String> parametros = new LinkedHashMap<>();
+          lista = conexionBD.selectList("envio.obtenerNumerosGuias", parametros);
+ 
+        } catch (Exception e) {
+        e.printStackTrace();
+        } finally {
+            conexionBD.close();
+        }
+    }
+    return lista;
+}
+
 public static List<Envio> obtenerEnvioNoGuia(String numeroGuia) {
     List<Envio> lista = new ArrayList();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
