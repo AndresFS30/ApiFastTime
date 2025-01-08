@@ -79,10 +79,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
     </insert>
 
-    <update id="editarEnvio" parameterType="pojo.Envio">
-    UPDATE Envio
-    SET  costo = #{costo}, idOrigen = #{idOrigen}, idDestino = #{idDestino},idCliente = #{idCliente}
-    WHERE idEnvio = #{idEnvio};
+    <update id="editarEnvio" statementType="CALLABLE" parameterType="pojo.Envio">
+        CALL ActualizarEnvio(
+            #{idEnvio},
+            #{idOrigen},
+            #{idDestino},
+            #{calleOrigen},
+            #{numeroOrigen},
+            #{coloniaOrigen},
+            #{ciudadOrigen},
+            #{estadoOrigen},
+            #{calleDestino},
+            #{numeroDestino},
+            #{codigoPostalOrigen},
+            #{codigoPostalDestino},
+            #{coloniaDestino},
+            #{ciudadDestino},
+            #{estadoDestino},
+            #{costo}
+        )
+    
     </update>
     
     <delete id="eliminarEnvioId" parameterType="pojo.Envio">

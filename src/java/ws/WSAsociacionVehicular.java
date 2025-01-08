@@ -6,8 +6,10 @@
 package ws;
 
 import dominio.ImpAsociacionVehicular;
+import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,6 +33,18 @@ public class WSAsociacionVehicular {
             return ImpAsociacionVehicular.registrarAsociacionVehicular(asociacion.getIdUnidad(), asociacion.getIdConductor());
         } else {
             throw new BadRequestException("Los parámetros idUnidad e idConductor son obligatorios.");
+        }
+    }
+    @GET
+    @Path("/listar")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<AsociacionVehicular> listarAsociaciones() {
+        try {
+            return ImpAsociacionVehicular.obtenerAsociaciones();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BadRequestException("error");
         }
     }
 }

@@ -108,10 +108,10 @@ public class WSEnvio {
         }
     }
     
-    @Path("eliminarEnvio")
+    @Path("eliminarEnvio/{idEnvio}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarEnvio(@QueryParam("idEnvio") Integer idEnvio) {
+    public Mensaje eliminarEnvio(@PathParam("idEnvio") Integer idEnvio) {
         return ImpEnvio.eliminarEnvio(idEnvio);
     }
     

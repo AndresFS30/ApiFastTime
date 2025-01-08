@@ -6,9 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="unidad">
    
     <select id="obtenerUnidad" resultType="pojo.Unidad">
-    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año as 'año', u.idInterno,u.idTipo,t.descripcionTipo 
+    SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año as 'año', u.idInterno, u.idTipo, t.descripcionTipo
     FROM Unidad u
-    INNER JOIN TipoUnidad t ON t.idTipo = u.idTipo; 
+    INNER JOIN TipoUnidad t ON t.idTipo = u.idTipo
+    LEFT JOIN BajasUnidad b ON b.idUnidad = u.idUnidad
+    WHERE b.idUnidad IS NULL;
+
     </select> 
     <select id="obtenerUnidadVIN" resultType="pojo.Unidad">
     SELECT u.idUnidad, u.vin, u.marca, u.modelo, u.año, u.idInterno,u.idTipo

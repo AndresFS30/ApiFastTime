@@ -9,5 +9,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INSERT INTO AsociacionVehiculo (idUnidad, idConductor)
         VALUES (#{idUnidad}, #{idConductor});
     </insert>
+    <select id="obtenerAsociaciones" resultType="pojo.AsociacionVehicular">
+    SELECT 
+        av.idAsociacion,
+        av.idConductor,
+        av.idUnidad,
+        COALESCE(e.numeroGuia, 'N/A') AS 'envioAsociado',
+        CONCAT(c2.nombre, " ", c2.apellidoPaterno, " ", c2.apellidoMaterno) AS 'conductor',
+        CONCAT(u.marca, " ", u.modelo, " ", u.año) AS 'unidad'
+    FROM 
+        AsociacionVehiculo av
+    INNER JOIN 
+        conductor c ON c.idConductor = av.idConductor
+    INNER JOIN 
+        colaborador c2 ON c2.idColaborador = c.idColaborador
+    INNER JOIN 
+        unidad u ON u.idUnidad = av.idUnidad
+    LEFT JOIN 
+        asociacionenvio a ON a.idConductor = c.idConductor
+    LEFT JOIN 
+        envio e ON e.idEnvio = a.idEnvio;
+
+    </select>
 
 </mapper>

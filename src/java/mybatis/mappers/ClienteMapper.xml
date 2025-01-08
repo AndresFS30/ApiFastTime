@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cliente">
     
     <select id="obtenerCliente"  resultType="pojo.Cliente"> 
-        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo, concat(d.calle,' ',d.numero,' ',d.colonia,' ',d.codigoPostal) AS 'direccion'
+        SELECT idCliente,cl.idDireccion,cl.nombre,cl.apellidoPaterno,cl.apellidoMaterno,cl.telefono,cl.correo, concat(d.calle,', ',d.numero,', ',d.colonia,', ',d.codigoPostal) AS 'direccion'
         FROM Cliente cl
         INNER JOIN DireccionCliente d ON d.idDireccion = cl.idDireccion
     </select>
