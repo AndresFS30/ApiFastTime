@@ -73,4 +73,71 @@ public class ImpAsociacionVehicular {
         }
         return lista;
     }
+    public static Mensaje eliminarAsociacion(Integer idAsociacion){
+    Mensaje respuesta = new Mensaje();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if(conexionBD != null){
+        try{
+        HashMap<String, Integer> parametros = new LinkedHashMap<>();
+        parametros.put("idAsociacion", idAsociacion);
+        int filasAfectadas = conexionBD.delete("asociacionVehicular.eliminarAsociacion" ,parametros);
+         if(filasAfectadas > 0){
+                respuesta.setError(false);
+                respuesta.setMensaje("Asociacion eliminada");
+
+            }else{
+                respuesta.setError(true);
+                respuesta.setMensaje("No se pudo eliminar la asociacion");
+            }
+            conexionBD.commit();
+          }catch(Exception e){
+                respuesta.setError(true);
+                respuesta.setMensaje(e.getMessage());
+
+        }finally{
+        conexionBD.close();
+        }
+
+    }else {
+         respuesta.setError(true);
+         respuesta.setMensaje("Por el momento no se puede consultar la informacion");
+    }
+    return respuesta ;
+    }
+    
+    public static Mensaje asociarEnvio(Integer idConductor, Integer idEnvio) {
+        Mensaje mensaje = new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+
+        if (conexionBD != null) {
+            try {
+                // Crear un objeto para insertar
+                HashMap<String, Integer> parametros = new HashMap<>();
+                parametros.put("idConductor", idConductor);
+                parametros.put("idEnvio", idEnvio);
+
+                // Ejecutar la consulta de inserción
+                int resultado = conexionBD.insert("asociacionVehicular.asociarEnvio", parametros);
+                conexionBD.commit();
+
+                if (resultado > 0) {
+                    mensaje.setError(false);
+                    mensaje.setMensaje("Asociación Envio registrada con éxito.");
+                } else {
+                    mensaje.setError(true);
+                    mensaje.setMensaje("No se pudo registrar la asociación vehicular. Inténtalo más tarde.");
+                }
+            } catch (Exception e) {
+                mensaje.setError(true);
+                mensaje.setMensaje(e.getMessage());
+                e.printStackTrace();
+            } finally {
+                conexionBD.close();
+            }
+        } else {
+            mensaje.setError(true);
+            mensaje.setMensaje("No se pudo establecer conexión con la base de datos.");
+        }
+        return mensaje;
+    }
 }

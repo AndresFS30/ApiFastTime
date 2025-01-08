@@ -23,11 +23,9 @@ public class Colaborador {
        private String noPersonal;
        private Integer idConductor;
        private String numeroLicencia;
+       private byte[] fotoBytes;
 
-    public Colaborador() {
-    }
-
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String correo, String password, Integer idRol, String rol, String fotoBase64, String noPersonal, Integer idConductor, String numeroLicencia) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String curp, String correo, String password, Integer idRol, String rol, String fotoBase64, String noPersonal, Integer idConductor, String numeroLicencia, byte[] fotoBytes) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -41,9 +39,21 @@ public class Colaborador {
         this.noPersonal = noPersonal;
         this.idConductor = idConductor;
         this.numeroLicencia = numeroLicencia;
+        this.fotoBytes = fotoBytes;
     }
 
-    
+    public Colaborador() {
+    }
+
+       
+       
+    public byte[] getFotoBytes() {
+        return fotoBytes;
+    }
+
+    public void setFotoBytes(byte[] fotoBytes) {
+        this.fotoBytes = fotoBytes;
+    }
 
     public Integer getIdColaborador() {
         return idColaborador;

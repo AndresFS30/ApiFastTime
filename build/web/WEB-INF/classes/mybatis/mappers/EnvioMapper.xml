@@ -50,8 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="cambiarStatus" parameterType="map"> 
-      INSERT INTO statusenvio (idEnvio, status,motivo)
-      VALUES (#{idEnvio},#{status},#{motivo});
+      INSERT INTO statusenvio (idEnvio, status,motivo,modificacion)
+      VALUES (#{idEnvio},#{status},#{motivo},NOW());
    </insert>
         
     <insert id="registrarEnvio" parameterType="pojo.Envio" >

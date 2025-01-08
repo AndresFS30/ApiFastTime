@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="colaborador">
     
     <select id="obtenerColaborador" resultType="pojo.Colaborador">
-    SELECT  c.idColaborador,c.nombre,c.apellidoPaterno,c.apellidoMaterno,c.curp,c.correo,c.password,c.idRol,r.descripcionRol AS 'rol',c.fotografia ,c.noPersonal,cd.numeroLicencia as 'numeroLicencia'
+    SELECT  c.idColaborador,c.nombre,c.apellidoPaterno,c.apellidoMaterno,c.curp,c.correo,c.password,c.idRol,r.descripcionRol AS 'rol' ,c.noPersonal,cd.numeroLicencia as 'numeroLicencia'
     FROM  colaborador c
     INNER JOIN Rol r ON r.idRol = c.idRol
     left JOIN conductor cd ON c.idColaborador = cd.idColaborador 
@@ -46,7 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{password},
             #{idRol},
             #{noPersonal},
-            #{numeroLicencia}
+            #{numeroLicencia},
+            #{fotoBytes}
         )
     </insert>
 
@@ -87,8 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
      
     <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
-    SELECT idColaborador, c.nombre, c.apellidoPaterno, c.apellidoMaterno, 
-           TO_BASE64(fotografia) as fotoBase64
+    SELECT TO_BASE64(fotografia) as fotoBase64, idColaborador, c.nombre, c.apellidoPaterno, c.apellidoMaterno 
+           
     FROM colaborador c
     WHERE c.idColaborador = #{idColaborador};
     </select>

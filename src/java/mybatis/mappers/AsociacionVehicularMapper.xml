@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         av.idAsociacion,
         av.idConductor,
         av.idUnidad,
+        e.idEnvio,
         COALESCE(e.numeroGuia, 'N/A') AS 'envioAsociado',
         CONCAT(c2.nombre, " ", c2.apellidoPaterno, " ", c2.apellidoMaterno) AS 'conductor',
         CONCAT(u.marca, " ", u.modelo, " ", u.año) AS 'unidad'
@@ -31,5 +32,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         envio e ON e.idEnvio = a.idEnvio;
 
     </select>
-
+     <delete id="eliminarAsociacion" parameterType="pojo.AsociacionVehicular">
+        DELETE
+        FROM AsociacionVehiculo
+        WHERE idAsociacion = #{idAsociacion}
+    </delete>
+    
+    <insert id="asociarEnvio" parameterType="java.util.HashMap">
+        INSERT INTO AsociacionEnvio (idConductor,idEnvio)
+        VALUES (#{idConductor},#{idEnvio});
+    </insert>
 </mapper>

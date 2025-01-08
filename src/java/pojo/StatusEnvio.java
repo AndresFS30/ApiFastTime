@@ -13,15 +13,29 @@ public class StatusEnvio {
     private Integer idStatus;
     private Integer idEnvio;
     private String status;
+    private String motivo;
 
-    public StatusEnvio() {
-    }
-
-    public StatusEnvio(Integer idStatus, Integer idEnvio, String status) {
+    public StatusEnvio(Integer idStatus, Integer idEnvio, String status, String motivo) {
         this.idStatus = idStatus;
         this.idEnvio = idEnvio;
         this.status = status;
+        this.motivo = motivo;
     }
+
+    public StatusEnvio() {
+    }
+    
+    
+        
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+    
+   
 
     public Integer getIdStatus() {
         return idStatus;
