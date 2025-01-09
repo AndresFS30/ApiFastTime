@@ -53,11 +53,11 @@ public class WSEnvio {
     }
     
     
-    @Path("obtenerEnvioNoGuia/{NumeroGuia}")
+    @Path("obtenerEnvioNoGuia/{numeroGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio>obtenerEnvioNoGuia(@PathParam("NumeroGuia")String NumeroGuia){
-        return ImpEnvio.obtenerEnvioNoGuia(NumeroGuia);
+    public List<Envio>obtenerEnvioNoGuia(@PathParam("numeroGuia")String numeroGuia){
+        return ImpEnvio.obtenerEnvioNoGuia(numeroGuia);
     }
     @Path("obtenerEstatus/{idEnvio}")
     @GET

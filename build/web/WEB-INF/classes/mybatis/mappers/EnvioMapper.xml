@@ -15,33 +15,114 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from envio e;
    </select>
    <select id="obtenerEnvioNoGuia" resultType="pojo.Envio">
-           SELECT e.numeroGuia, s.status,e.idEnvio,s.modificacion,
-       CONCAT(c2.nombre, ' ', c2.apellidoMaterno, ' ', c2.apellidoPaterno) AS conductor,
-       CONCAT(do.calle, ' ', do.numero, ' ', do.colonia, ' ', do.codigoPostal, ' ', do.ciudad, ' ', do.estado) AS origen,
-       CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino
-    FROM envio e
-    INNER JOIN direcciondestino d2 ON d2.idDestino = e.idDestino
-    INNER JOIN DireccionOrigen do ON do.idOrigen = e.idOrigen
-    INNER JOIN asociacionenvio a ON a.idEnvio = e.idEnvio
-    INNER JOIN statusenvio s ON s.idEnvio = e.idEnvio
-    INNER JOIN conductor c ON c.idConductor = a.idConductor
-    INNER JOIN colaborador c2 ON c2.idColaborador = c.idConductor
-    WHERE e.numeroGuia = #{numeroGuia};
+    SELECT 
+    e.idEnvio,
+    COALESCE(e.numeroGuia, 'N/A') AS 'noGuia',
+    COALESCE(CONCAT(c2.nombre, ' ', c2.apellidoPaterno, ' ', c2.apellidoMaterno), 'N/A') AS 'conductor',
+    COALESCE(CONCAT(c3.nombre, ' ', c3.apellidoPaterno, ' ', c3.apellidoMaterno), 'N/A') AS 'cliente',
+    COALESCE(e.costo, 0.0) AS 'costo',
+    COALESCE(CONCAT(
+        dd.calle, ', ', 
+        dd.numero, ', ', 
+        dd.colonia, ', ', 
+        dd.codigoPostal, ', ', 
+        dd.ciudad, ', ', 
+        dd.estado
+    ), 'N/A') AS 'destino',
+    COALESCE(CONCAT(
+        do.calle, ', ', 
+        do.numero, ', ', 
+        do.colonia, ', ', 
+        do.codigoPostal, ', ', 
+        do.ciudad, ', ', 
+        do.estado
+    ), 'N/A') AS 'origen',
+    COALESCE(MAX(s.modificacion), '0000-00-00 00:00:00') AS 'Modificacion',
+    COALESCE(MAX(s.status), 'N/A') AS 'status'
+FROM 
+    envio e
+LEFT JOIN 
+    asociacionenvio ae ON e.idEnvio = ae.idEnvio
+LEFT JOIN 
+    conductor c ON ae.idConductor = c.idConductor
+LEFT JOIN 
+    colaborador c2 ON c.idColaborador = c2.idColaborador
+LEFT JOIN 
+    cliente c3 ON e.idCliente = c3.idCliente
+LEFT JOIN 
+    direccionDestino dd ON e.idDestino = dd.idDestino
+LEFT JOIN 
+    direccionOrigen do ON e.idOrigen = do.idOrigen
+LEFT JOIN 
+    statusenvio s ON e.idEnvio = s.idEnvio
+   
+    WHERE e.numeroGuia = #{numeroGuia}
+GROUP BY 
+    e.idEnvio, 
+    e.numeroGuia, 
+    c2.nombre, 
+    c2.apellidoPaterno, 
+    c2.apellidoMaterno, 
+    c3.nombre, 
+    c3.apellidoPaterno, 
+    c3.apellidoMaterno, 
+    e.costo, 
+    dd.calle, 
+    dd.numero, 
+    dd.colonia, 
+    dd.codigoPostal, 
+    dd.ciudad, 
+    dd.estado, 
+    do.calle, 
+    do.numero, 
+    do.colonia, 
+    do.codigoPostal, 
+    do.ciudad, 
+    do.estado
+
+
    </select>
 
    <select id="obtenerEnvioNoLicencia" resultType="pojo.Envio">
-    SELECT e.numeroGuia, s.status,
-       CONCAT(c2.nombre, ' ', c2.apellidoMaterno, ' ', c2.apellidoPaterno) AS `repartidor`,
-       CONCAT(do.calle, ' ', do.numero, ' ', do.colonia, ' ', do.codigoPostal, ' ', do.ciudad, ' ', do.estado) AS `origen`,
-       CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS `destino`
-    FROM envio e
-    INNER JOIN direcciondestino d2 ON d2.idDestino = e.idDestino
-    INNER JOIN DireccionOrigen do ON do.idOrigen = e.idOrigen
-    INNER JOIN asociacionenvio a ON a.idEnvio = e.idEnvio
-    INNER JOIN statusenvio s ON s.idEnvio = e.idEnvio
-    INNER JOIN conductor c ON c.idConductor = a.idConductor
-    INNER JOIN colaborador c2 ON c2.idColaborador = c.idConductor
-    WHERE c.numeroLicencia = #{numeroLicencia};
+   SELECT 
+    e.numeroGuia AS guia,
+    e.idEnvio AS envio,
+    COALESCE(c3.telefono, 'N/A') AS telefonoCliente,
+    COALESCE(c3.correo, 'N/A') AS correoCliente,
+    COALESCE(CONCAT(c3.nombre, ' ', c3.apellidoPaterno, ' ', c3.apellidoMaterno), 'N/A') AS cliente,
+    COALESCE(CONCAT(do.calle, ' ', do.numero, ', ', do.colonia, ', ', do.codigoPostal, ', ', do.ciudad, ', ', do.estado), 'N/A') AS origen,
+    COALESCE(CONCAT(d2.calle, ' ', d2.numero, ', ', d2.colonia, ', ', d2.codigoPostal, ', ', d2.ciudad, ', ', d2.estado), 'N/A') AS destino,
+    COALESCE(s.status, 'N/A') AS estado,
+    COALESCE(s.modificacion, 'N/A') AS ultimaModificacion,
+    GROUP_CONCAT(p.descripcionPaquete SEPARATOR ', ') AS contenidos,
+    COALESCE(CONCAT(c2.nombre, ' ', c2.apellidoPaterno, ' ', c2.apellidoMaterno), 'N/A') AS repartidor
+FROM envio e
+-- Relaciones con direcciones
+LEFT JOIN direcciondestino d2 ON d2.idDestino = e.idDestino
+LEFT JOIN DireccionOrigen do ON do.idOrigen = e.idOrigen
+-- Relación con cliente
+LEFT JOIN cliente c3 ON c3.idCliente = e.idCliente
+-- Relación con asociación de envíos y conductor
+INNER JOIN asociacionenvio ae ON ae.idEnvio = e.idEnvio
+INNER JOIN conductor c ON c.idConductor = ae.idConductor
+INNER JOIN colaborador c2 ON c2.idColaborador = c.idConductor
+-- Relación con paquetes y estatus de envío
+LEFT JOIN paquete p ON p.numeroGuia = e.numeroGuia
+LEFT JOIN statusenvio s ON s.idEnvio = e.idEnvio
+-- Filtro para la última modificación por envío
+WHERE c.numeroLicencia = 'LIC-011' -- Reemplaza 'LIC-011' con el número de licencia específico
+  AND s.modificacion = (
+      SELECT MAX(s2.modificacion)
+      FROM statusenvio s2
+      WHERE s2.idEnvio = e.idEnvio
+  )
+GROUP BY 
+    e.numeroGuia, e.idEnvio, c3.telefono, c3.correo, c3.nombre, c3.apellidoPaterno, c3.apellidoMaterno,
+    do.calle, do.numero, do.colonia, do.codigoPostal, do.ciudad, do.estado,
+    d2.calle, d2.numero, d2.colonia, d2.codigoPostal, d2.ciudad, d2.estado,
+    s.status, s.modificacion, c2.nombre, c2.apellidoPaterno, c2.apellidoMaterno;
+
+
 </select> 
     <select id="obtenerEstatus" resultType="pojo.Envio">
     SELECT se.idStatus, se.idEnvio, se.status,se.motivo,se.modificacion

@@ -53,20 +53,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     
     
-<update id="editarColaborador" parameterType="map">
-    CALL actualizarColaborador(
-        #{idColaborador},
-        #{nombre},
-        #{apellidoPaterno},
-        #{apellidoMaterno},
-        #{curp},
-        #{noPersonal},
-        #{correo},
-        #{password},
-        #{idRol},
-        #{numeroLicencia}
-    )
+<update id="editarColaborador"  parameterType="map">
+    <!-- Actualizar el colaborador -->
+    UPDATE colaborador
+    SET 
+        nombre = #{nombre},
+        apellidoPaterno = #{apellidoPaterno},
+        apellidoMaterno = #{apellidoMaterno},
+        curp = #{curp},
+        noPersonal = #{noPersonal},
+        correo = #{correo},
+        password = #{password},
+        idRol = #{idRol}
+    WHERE idColaborador = #{idColaborador};
 </update>
+
+<update id="editarColaboradormovil"  parameterType="map">
+    <!-- Actualizar el colaborador -->
+    CALL actualizarColaborador(#{idColaborador},#{nombre},#{apellidoPaterno},#{apellidoMaterno},#{curp}, #{correo},#{password},#{idRol}
+    #{noPersonal},#{numeroLicencia}) 
+</update>
+
+<update id="actualizarLicenciaConductor" parameterType="map">
+    <!-- Si el rol es 3, manejar conductor -->
+    <if test="idRol == 3">
+        <!-- Verificar si existe el colaborador en conductor -->
+        <choose>
+            <when test="(SELECT COUNT(*) FROM conductor WHERE idColaborador = #{idColaborador}) > 0">
+                UPDATE conductor
+                SET numeroLicencia = #{numeroLicencia}
+                WHERE idColaborador = #{idColaborador};
+            </when>
+            <otherwise>
+                INSERT INTO conductor (idColaborador, numeroLicencia)
+                VALUES (#{idColaborador}, #{numeroLicencia});
+            </otherwise>
+        </choose>
+    </if>
+</update>
+
+<delete id="eliminarConductor" parameterType="map">
+    <!-- Si el rol no es 3, eliminar de conductor -->
+    <if test="idRol != 3">
+        DELETE FROM conductor
+        WHERE idColaborador = #{idColaborador};
+    </if>
+</delete>
+
 
 
      <insert id="actualizarConductor" parameterType="pojo.Colaborador" >

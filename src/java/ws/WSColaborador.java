@@ -118,6 +118,21 @@ public class WSColaborador {
         }
     }
     
+    @Path("editarColaboradorMovil")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje editarColaboradorMovil(String jsonColaborador){
+        try{
+        Gson gson = new Gson();
+        Colaborador colaborador = gson.fromJson(jsonColaborador, Colaborador.class);
+        return ImpColaborador.editarColaboradorMovil(colaborador);
+        }catch( Exception e){
+            e.printStackTrace();
+            throw new BadRequestException();
+        }
+    }
+    
     @Path("eliminarColaborador/{idColaborador}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)

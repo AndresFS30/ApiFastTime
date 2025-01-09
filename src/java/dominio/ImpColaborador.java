@@ -153,6 +153,33 @@ public static List<Colaborador> obtenerColaboradorRol(String rol) {
     return respuesta;
     }
     
+    public static Mensaje editarColaboradorMovil( Colaborador colaborador){
+    Mensaje respuesta = new Mensaje();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+    if(conexionBD!= null){
+    try{
+         int resultado =conexionBD.update("colaborador.editarColaboradormovil", colaborador);
+         conexionBD.commit();
+         if(resultado > 0){
+             respuesta.setError(false);
+             respuesta.setMensaje("Colaborador editado con exito");
+         }else{
+             respuesta.setError(true);
+             respuesta.setMensaje("no se pudo editar al colaborador, intentarlo mas tarde.");
+         }
+         }catch(Exception e){
+         respuesta.setError(true);
+         respuesta.setMensaje(e.getMessage());
+         }finally{
+        conexionBD.close();
+        }
+    } else{
+        respuesta.setError(true);
+         respuesta.setMensaje("No se pudo establecer conexión a la base de datos");
+     }
+    return respuesta;
+    }
+    
     public static Mensaje eliminarColaborador(Integer idColaborador){
     Mensaje respuesta = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();

@@ -30,19 +30,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="obtenerPaqueteNoGuia"  resultType="pojo.Paquete"> 
-   SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
-    p.descripcionPaquete,c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho,p.idPaquete,se.modificacion
+     SELECT se.status,CONCAT(d.calle, ' ', d.numero, ' ', d.colonia, ' ', d.codigoPostal) AS origen,CONCAT(d2.calle, ' ', d2.numero, ' ', d2.colonia, ' ', d2.codigoPostal, ' ', d2.estado, ' ', d2.ciudad) AS destino,
+    c.nombre,e.numeroGuia,p.peso,p.alto,p.profundidad,p.ancho,p.idPaquete,se.modificacion
     FROM Statusenvio se
     INNER JOIN Envio e ON e.idEnvio = se.idEnvio
     INNER JOIN Direccionorigen d ON d.idOrigen = e.idOrigen
     INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
     INNER JOIN Paquete p ON p.numeroGuia =e.numeroGuia 
     INNER JOIN Cliente c ON c.idCliente = e.idCliente
-    WHERE e.numeroGuia = 'PAQ123456789' and  se.modificacion = (
-    SELECT MAX(se2.modificacion)
-    FROM Statusenvio se2
-    WHERE se2.idEnvio = se.idEnvio
-);
+    WHERE e.numeroGuia = 'ENV-1253daf1-cc9e-11ef-9'  
+
+
     
     </select>
     

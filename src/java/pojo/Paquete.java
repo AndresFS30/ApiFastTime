@@ -22,12 +22,12 @@ public class Paquete {
     private Float profundidad;
     private Integer idEnvio;
     private String envio;
+    private String origen;
+    private String destino;
     private String status;
+    private String nombre;
 
-    public Paquete() {
-    }
-
-    public Paquete(Integer idPaquete, String numeroGuia, String descripcionPaquete, Float peso, String dimensiones, Float alto, Float ancho, Float profundidad, Integer idEnvio, String envio, String status) {
+    public Paquete(Integer idPaquete, String numeroGuia, String descripcionPaquete, Float peso, String dimensiones, Float alto, Float ancho, Float profundidad, Integer idEnvio, String envio, String origen, String destino, String status, String nombre) {
         this.idPaquete = idPaquete;
         this.numeroGuia = numeroGuia;
         this.descripcionPaquete = descripcionPaquete;
@@ -38,8 +38,40 @@ public class Paquete {
         this.profundidad = profundidad;
         this.idEnvio = idEnvio;
         this.envio = envio;
+        this.origen = origen;
+        this.destino = destino;
         this.status = status;
+        this.nombre = nombre;
     }
+
+    public Paquete() {
+    }
+
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
 
     public Integer getIdPaquete() {
         return idPaquete;
