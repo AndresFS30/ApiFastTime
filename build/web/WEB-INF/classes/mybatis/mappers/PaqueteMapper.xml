@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     INNER JOIN DireccionDestino d2 ON d2.idDestino = e.idDestino
     INNER JOIN Paquete p ON p.numeroGuia =e.numeroGuia 
     INNER JOIN Cliente c ON c.idCliente = e.idCliente
-    WHERE e.numeroGuia = 'ENV-1253daf1-cc9e-11ef-9'  
+    WHERE e.numeroGuia = #{numeroGuia}
 
 
     

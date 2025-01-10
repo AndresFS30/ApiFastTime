@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="obtenerEnvioNoGuia" resultType="pojo.Envio">
     SELECT 
     e.idEnvio,
-    COALESCE(e.numeroGuia, 'N/A') AS 'noGuia',
+    COALESCE(e.numeroGuia, 'N/A') AS 'Guia',
     COALESCE(CONCAT(c2.nombre, ' ', c2.apellidoPaterno, ' ', c2.apellidoMaterno), 'N/A') AS 'conductor',
     COALESCE(CONCAT(c3.nombre, ' ', c3.apellidoPaterno, ' ', c3.apellidoMaterno), 'N/A') AS 'cliente',
     COALESCE(e.costo, 0.0) AS 'costo',
@@ -85,14 +85,14 @@ GROUP BY
 
    <select id="obtenerEnvioNoLicencia" resultType="pojo.Envio">
    SELECT 
-    e.numeroGuia AS guia,
-    e.idEnvio AS envio,
-    COALESCE(c3.telefono, 'N/A') AS telefonoCliente,
-    COALESCE(c3.correo, 'N/A') AS correoCliente,
+    e.numeroGuia AS numeroGuia,
+    e.idEnvio AS idEnvio,
+    COALESCE(c3.telefono, 'N/A') AS telefono,
+    COALESCE(c3.correo, 'N/A') AS correo,
     COALESCE(CONCAT(c3.nombre, ' ', c3.apellidoPaterno, ' ', c3.apellidoMaterno), 'N/A') AS cliente,
     COALESCE(CONCAT(do.calle, ' ', do.numero, ', ', do.colonia, ', ', do.codigoPostal, ', ', do.ciudad, ', ', do.estado), 'N/A') AS origen,
     COALESCE(CONCAT(d2.calle, ' ', d2.numero, ', ', d2.colonia, ', ', d2.codigoPostal, ', ', d2.ciudad, ', ', d2.estado), 'N/A') AS destino,
-    COALESCE(s.status, 'N/A') AS estado,
+    COALESCE(s.status, 'N/A') AS status,
     COALESCE(s.modificacion, 'N/A') AS ultimaModificacion,
     GROUP_CONCAT(p.descripcionPaquete SEPARATOR ', ') AS contenidos,
     COALESCE(CONCAT(c2.nombre, ' ', c2.apellidoPaterno, ' ', c2.apellidoMaterno), 'N/A') AS repartidor
@@ -110,7 +110,7 @@ INNER JOIN colaborador c2 ON c2.idColaborador = c.idConductor
 LEFT JOIN paquete p ON p.numeroGuia = e.numeroGuia
 LEFT JOIN statusenvio s ON s.idEnvio = e.idEnvio
 -- Filtro para la última modificación por envío
-WHERE c.numeroLicencia = 'LIC-011' -- Reemplaza 'LIC-011' con el número de licencia específico
+WHERE c.numeroLicencia = 'LIC-091' -- Reemplaza 'LIC-011' con el número de licencia específico
   AND s.modificacion = (
       SELECT MAX(s2.modificacion)
       FROM statusenvio s2
@@ -131,8 +131,12 @@ GROUP BY
     </select>
 
     <insert id="cambiarStatus" parameterType="map"> 
-      INSERT INTO statusenvio (idEnvio, status,motivo,modificacion)
-      VALUES (#{idEnvio},#{status},#{motivo},NOW());
+      INSERT INTO statusenvio (idEnvio, status, motivo, modificacion)
+      SELECT #{idEnvio}, #{status}, #{motivo}, NOW()
+      WHERE EXISTS (
+          SELECT 1 FROM statusEnvio WHERE idEnvio = #{idEnvio}
+      );
+
    </insert>
         
     <insert id="registrarEnvio" parameterType="pojo.Envio" >

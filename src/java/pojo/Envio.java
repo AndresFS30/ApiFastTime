@@ -45,11 +45,14 @@ public class Envio {
     private String ciudadDestino;
     private String estadoDestino;
     private Integer idColaborador;
+    private String contenidos;
+    private String correo;
+    private String telefono;
 
     public Envio() {
     }
 
-    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, Integer idStatus, String numeroGuia, String conductor, String motivo, String modificacion, String calleOrigen, Integer numeroOrigen, String coloniaOrigen, Integer codigoPostalOrigen, String ciudadOrigen, String estadoOrigen, String calleDestino, Integer numeroDestino, String coloniaDestino, Integer codigoPostalDestino, String ciudadDestino, String estadoDestino, Integer idColaborador) {
+    public Envio(Integer idEnvio, Integer idCliente, Integer idOrigen, Integer idDestino, Integer idPaquete, String calle, Integer numero, String colonia, Integer codigoPostal, String ciudad, String estado, String destino, String origen, String noGuia, String costo, String status, String cliente, Integer idStatus, String numeroGuia, String conductor, String motivo, String modificacion, String calleOrigen, Integer numeroOrigen, String coloniaOrigen, Integer codigoPostalOrigen, String ciudadOrigen, String estadoOrigen, String calleDestino, Integer numeroDestino, String coloniaDestino, Integer codigoPostalDestino, String ciudadDestino, String estadoDestino, Integer idColaborador, String contenidos, String correo, String telefono) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.idOrigen = idOrigen;
@@ -85,10 +88,39 @@ public class Envio {
         this.ciudadDestino = ciudadDestino;
         this.estadoDestino = estadoDestino;
         this.idColaborador = idColaborador;
+        this.contenidos = contenidos;
+        this.correo = correo;
+        this.telefono = telefono;
     }
 
-    public Integer getIdEnvio() {
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    
+
+   public Integer getIdEnvio() {
         return idEnvio;
+    }
+
+    public String getContenidos() {
+        return contenidos;
+    }
+
+    public void setContenidos(String contenidos) {
+        this.contenidos = contenidos;
     }
 
     public void setIdEnvio(Integer idEnvio) {

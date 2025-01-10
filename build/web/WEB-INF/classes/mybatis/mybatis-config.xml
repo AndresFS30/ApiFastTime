@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <dataSource type="POOLED" >
 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
 <property name="url" value="jdbc:mysql://localhost:3306/timefast?serverTimezone=UTC"/>  
-<property name="username" value="root"/>    
+<property name="username" value="apiFastTime"/>    
 <property name="password" value="Whit3Rabbit!"/>
 <property name="poolMaximumActiveConnections" value="50"/>
 </dataSource>
